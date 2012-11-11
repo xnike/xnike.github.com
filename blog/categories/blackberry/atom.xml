@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Blackberry | My Octopress Blog]]></title>
+  <link href="http://xnike.github.com/blog/categories/blackberry/atom.xml" rel="self"/>
+  <link href="http://xnike.github.com/"/>
+  <updated>2012-11-11T22:22:22+04:00</updated>
+  <id>http://xnike.github.com/</id>
+  <author>
+    <name><![CDATA[xnike]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Building POCO to use with BBNDK]]></title>
+    <link href="http://xnike.github.com/blog/2012/11/11/building-poco-to-use-with-bbndk/"/>
+    <updated>2012-11-11T19:38:00+04:00</updated>
+    <id>http://xnike.github.com/blog/2012/11/11/building-poco-to-use-with-bbndk</id>
+    <content type="html"><![CDATA[<p>On the GitHub page of <a href="https://github.com/falcon4ever/openFrameworks/tree/developPlayBook/addons/ofxQNX/libs/poco/Sources">OpenFramework project</a> there is a guide that shows how to build <a href="http://pocoproject.org">POCO C++ libraries</a> for Blackberry 10 and Playbook on your Linux or Mac OS box.</p>
+
+<p>These steps are:</p>
+
+<ol>
+<li><p>Download and install the BlackBerry Native SDK for your platform from the <a href="https://developer.blackberry.com/cascades/download/">Cascade</a> or <a href="http://developer.blackberry.com/native/download/">Native</a> downloads page.</p></li>
+<li><p>Download a stable release from the project <a href="http://pocoproject.org/download/index.html">downloads page</a>. Basic Edition is enough because crypto, mysql, odbc, openssl support will be ommited during the build process. For now, the latest release is <a href="https://sourceforge.net/projects/poco/files/sources/poco-1.4.4/poco-1.4.4.tar.gz/download">1.4.4</a>.</p></li>
+<li><p>Extract the downloaded archive file.</p></li>
+<li><p>Create directories for one or several of the available building targets for which you need to compile the library: BB10 simulator, BB10 target, Playbook simulator, Playbook target.</p></li>
+<li><p>Download the appropriate configuration profile(s) <a href="https://github.com/falcon4ever/openFrameworks/blob/developPlayBook/addons/ofxQNX/libs/poco/Sources/QNX-bb10-sim">BB10 simulator</a>, <a href="https://github.com/falcon4ever/openFrameworks/blob/developPlayBook/addons/ofxQNX/libs/poco/Sources/QNX-bb10-device">BB10 target</a>, <a href="https://github.com/falcon4ever/openFrameworks/blob/developPlayBook/addons/ofxQNX/libs/poco/Sources/QNX-playbook-sim">Playbook simulator</a>, <a href="https://github.com/falcon4ever/openFrameworks/blob/developPlayBook/addons/ofxQNX/libs/poco/Sources/QNX-playbook-device">Playbook target</a> and store it (them) to the "Unpacked POCO root"\build\config directory.</p></li>
+<li><p>Download <a href="https://github.com/falcon4ever/openFrameworks/blob/developPlayBook/addons/ofxQNX/libs/poco/Sources/syslog.h">syslog.h</a> and copy it to "SDK root"\target\qnx6\usr\include directory.</p></li>
+<li><p>Build library for the chosen configuration profile and then add it to your project.</p></li>
+</ol>
+
+
+<p>Load the environment variables for the console session:
+<code>
+source "SDK root"/bbndk-env.sh
+</code>
+Configuring build:
+<code>
+cd "Unpacked POCO root"
+./configure --config="Profile file name" --omit=NetSSL_OpenSSL,Crypto,Data/ODBC,Data/MySQL --no-tests --no-samples --static --prefix="Profile result directory"
+</code>
+Compiling and installing result of the build in the "Profile result directory":
+<code>
+make -s
+make install
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

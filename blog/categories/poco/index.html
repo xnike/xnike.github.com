@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>My Octopress Blog</title>
+  <title>Category: POCO - My Octopress Blog</title>
   <meta name="author" content="xnike">
 
   
-  <meta name="description" content="On the GitHub page of OpenFramework project there is a guide that shows how to build POCO C++ libraries for Blackberry 10 and Playbook on your Linux &hellip;">
+  <meta name="description" content="Category: POCO">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xnike.github.com/">
+  <link rel="canonical" href="http://xnike.github.comblog/categories/poco/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -74,122 +74,40 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article role="article">
   
-  
-  
-    <article>
-      
   <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/11/building-poco-to-use-with-bbndk/">Building POCO to Use With BBNDK</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-11T19:38:00+04:00" pubdate data-updated="true">Nov 11<span>th</span>, 2012</time>
-        
-      </p>
+    <h1 class="entry-title">Category: POCO</h1>
     
   </header>
+  
+  <div id="blog-archives" class="category">
 
 
-  <div class="entry-content"><p>On the GitHub page of <a href="https://github.com/falcon4ever/openFrameworks/tree/developPlayBook/addons/ofxQNX/libs/poco/Sources">OpenFramework project</a> there is a guide that shows how to build <a href="http://pocoproject.org">POCO C++ libraries</a> for Blackberry 10 and Playbook on your Linux or Mac OS box.</p>
 
-<p>These steps are:</p>
+  
+  <h2>2012</h2>
 
-<ol>
-<li><p>Download and install the BlackBerry Native SDK for your platform from the <a href="https://developer.blackberry.com/cascades/download/">Cascade</a> or <a href="http://developer.blackberry.com/native/download/">Native</a> downloads page.</p></li>
-<li><p>Download a stable release from the project <a href="http://pocoproject.org/download/index.html">downloads page</a>. Basic Edition is enough because crypto, mysql, odbc, openssl support will be ommited during the build process. For now, the latest release is <a href="https://sourceforge.net/projects/poco/files/sources/poco-1.4.4/poco-1.4.4.tar.gz/download">1.4.4</a>.</p></li>
-<li><p>Extract the downloaded archive file.</p></li>
-<li><p>Create directories for one or several of the available building targets for which you need to compile the library: BB10 simulator, BB10 target, Playbook simulator, Playbook target.</p></li>
-<li><p>Download the appropriate configuration profile(s) <a href="https://github.com/falcon4ever/openFrameworks/blob/developPlayBook/addons/ofxQNX/libs/poco/Sources/QNX-bb10-sim">BB10 simulator</a>, <a href="https://github.com/falcon4ever/openFrameworks/blob/developPlayBook/addons/ofxQNX/libs/poco/Sources/QNX-bb10-device">BB10 target</a>, <a href="https://github.com/falcon4ever/openFrameworks/blob/developPlayBook/addons/ofxQNX/libs/poco/Sources/QNX-playbook-sim">Playbook simulator</a>, <a href="https://github.com/falcon4ever/openFrameworks/blob/developPlayBook/addons/ofxQNX/libs/poco/Sources/QNX-playbook-device">Playbook target</a> and store it (them) to the &#8220;Unpacked POCO root&#8221;\build\config directory.</p></li>
-<li><p>Download <a href="https://github.com/falcon4ever/openFrameworks/blob/developPlayBook/addons/ofxQNX/libs/poco/Sources/syslog.h">syslog.h</a> and copy it to &#8220;SDK root&#8221;\target\qnx6\usr\include directory.</p></li>
-<li><p>Build library for the chosen configuration profile and then add it to your project.</p></li>
-</ol>
+<article>
+  
+<h1><a href="/blog/2012/11/11/building-poco-to-use-with-bbndk/">Building POCO to use with BBNDK</a></h1>
+<time datetime="2012-11-11T19:38:00+04:00" pubdate><span class='month'>Nov</span> <span class='day'>11</span> <span class='year'>2012</span></time>
 
-
-<p>Load the environment variables for the console session:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>source "SDK root"/bbndk-env.sh</span></code></pre></td></tr></table></div></figure>
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/bb10/'>BB10</a>, <a class='category' href='/blog/categories/bb10/'>BB10</a>, <a class='category' href='/blog/categories/bbndk/'>BBNDK</a>, <a class='category' href='/blog/categories/blackberry/'>Blackberry</a>, <a class='category' href='/blog/categories/c-/'>C++</a>, <a class='category' href='/blog/categories/cascades/'>Cascades</a>, <a class='category' href='/blog/categories/native/'>Native</a>, <a class='category' href='/blog/categories/poco/'>POCO</a>, <a class='category' href='/blog/categories/playbook/'>Playbook</a>, <a class='category' href='/blog/categories/qnx/'>QNX</a></span>
+</footer>
 
 
-<p>Configuring build:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd "Unpacked POCO root"
-</span><span class='line'>./configure --config="Profile file name" --omit=NetSSL_OpenSSL,Crypto,Data/ODBC,Data/MySQL --no-tests --no-samples --static --prefix="Profile result directory"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Compiling and installing result of the build in the &#8220;Profile result directory&#8221;:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>make -s
-</span><span class='line'>make install</span></code></pre></td></tr></table></div></figure>
+</article>
 
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/09/15/zzz/">Zzz</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
 
   
+</article>
 
-
-<time datetime="2012-09-15T20:13:00+04:00" pubdate data-updated="true">Sep 15<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
 </div>
-  
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -210,7 +128,7 @@
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/xnike">@xnike</a> on GitHub
@@ -240,7 +158,7 @@
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -268,6 +186,7 @@
 
   
 </aside>
+
 
     </div>
   </div>
