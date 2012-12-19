@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Blackberry | My Octopress Blog]]></title>
   <link href="http://xnike.github.com/blog/categories/blackberry/atom.xml" rel="self"/>
   <link href="http://xnike.github.com/"/>
-  <updated>2012-11-11T22:22:22+04:00</updated>
+  <updated>2012-12-19T17:47:55+04:00</updated>
   <id>http://xnike.github.com/</id>
   <author>
     <name><![CDATA[xnike]]></name>
@@ -12,6 +12,84 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Cascades for Blackberry 10. Theme based asset selector]]></title>
+    <link href="http://xnike.github.com/blog/2012/12/19/cascades-for-blackberry-10-theme-based-asset-selector/"/>
+    <updated>2012-12-19T16:58:00+04:00</updated>
+    <id>http://xnike.github.com/blog/2012/12/19/cascades-for-blackberry-10-theme-based-asset-selector</id>
+    <content type="html"><![CDATA[<p>Upcoming Blackberry 10 release will have full theme support. According to the <a href="https://developer.blackberry.com/cascades/reference/bb__cascades__themesupport.html">API Documentation</a> there are Brigth and Dark themes:
+<img class="center" src="https://developer.blackberry.com/cascades/files/reference/images/theme_examples.png"></p>
+
+<p>The default theme is Bright. To change the application theme to Dark specify the following configuration value in the application`s bar-descriptor.xml file:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;env var="CASCADES_THEME" value="dark"/></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>or previously</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;cascadesTheme>dark&lt;/cascadesTheme></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>If You have, for example, a background image for each of the available themes - "asset:///images/bright/background.png" and "asset:///images/dark/background.png" - You can easily manage it by adding a globally available property:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kr">import</span> <span class="nx">bb</span><span class="p">.</span><span class="nx">cascades</span> <span class="mf">1.0</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Page</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">id</span><span class="o">:</span> <span class="nx">mainPage</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// this property will contain string representation of the current application theme.</span>
+</span><span class='line'><span class="nx">property</span> <span class="nx">string</span> <span class="nx">theme</span><span class="o">:</span> <span class="nx">themeStyleToString</span><span class="p">(</span><span class="nx">Application</span><span class="p">.</span><span class="nx">themeSupport</span><span class="p">.</span><span class="nx">theme</span><span class="p">.</span><span class="nx">colorTheme</span><span class="p">.</span><span class="nx">style</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Container</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">ImageView</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">imageSource</span><span class="o">:</span> <span class="s2">&quot;asset:///images/&quot;</span> <span class="o">+</span> <span class="nx">mainPage</span><span class="p">.</span><span class="nx">theme</span> <span class="o">+</span> <span class="s2">&quot;/background.png&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">themeStyleToString</span><span class="p">(</span><span class="nx">style</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">switch</span><span class="p">(</span><span class="nx">style</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">case</span> <span class="nx">VisualStyle</span><span class="p">.</span><span class="nx">Bright</span><span class="o">:</span>    <span class="k">return</span> <span class="s2">&quot;bright&quot;</span>
+</span><span class='line'>        <span class="k">case</span> <span class="nx">VisualStyle</span><span class="p">.</span><span class="nx">Dark</span><span class="o">:</span>      <span class="k">return</span> <span class="s2">&quot;dark&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// will use dark as default in case of unknown</span>
+</span><span class='line'>    <span class="k">return</span> <span class="s2">&quot;dark&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Unfortunately, right now I know only one way to change the application theme - via bar-descriptor.xml.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Building POCO to use with BBNDK]]></title>
