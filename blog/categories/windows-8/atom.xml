@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Windows 8 | My Octopress Blog]]></title>
+  <link href="http://xnike.github.com/blog/categories/windows-8/atom.xml" rel="self"/>
+  <link href="http://xnike.github.com/"/>
+  <updated>2013-01-12T16:35:19+04:00</updated>
+  <id>http://xnike.github.com/</id>
+  <author>
+    <name><![CDATA[xnike]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Marmalade SDK and a non-admin user in Win8]]></title>
+    <link href="http://xnike.github.com/blog/2013/01/12/marmalade-sdk-and-a-non-admin-user-in-win8/"/>
+    <updated>2013-01-12T12:41:00+04:00</updated>
+    <id>http://xnike.github.com/blog/2013/01/12/marmalade-sdk-and-a-non-admin-user-in-win8</id>
+    <content type="html"><![CDATA[<p>If you installed and configured for together work Visual C++ 2010 Express Edition and Marmalade SDK under Windows 8 and then try to run a "Hello World" Marmalade example project by using Windows account without administrative rights, you can find in the console window the following error message <strong>"Visual Studio 6.0 requested but not found installed (MSDEV.EXE)"</strong>:</p>
+
+<p><img class="center" src="/images/posts/marmalade01.png"></p>
+
+<p>That is because you have no available configuration for your account, only defaults.</p>
+
+<p>This issue can be easily fixed in two steps:</p>
+
+<ol>
+<li>Defining S3E_DIR environment variable:</li>
+</ol>
+
+
+<p>a) create for you account S3E_DIR environment variable points to s3e subdirectory in you Marmalade SDK installation directory
+<img class="center" src="/images/posts/marmalade02.png">
+b) or change type of this environment variable from "user variable" to "system" for account from you installed Marmalade SDK
+<img class="center" src="/images/posts/marmalade03.png">
+2. Configuring Marmalade to use Visual C++ 2010 Express Edition:</p>
+
+<p>a) replace mkb.config file located in %USERPROFILE%\AppData\Roaming\Marmalade\ from the account with administrative rights;</p>
+
+<p>b) or just add to the end of the %USERPROFILE%\AppData\Roaming\Marmalade\mkb.config file following lines
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvct-version=none
+</span><span class='line'>default-buildenv=VC10</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>so the entire %USERPROFILE%\AppData\Roaming\Marmalade\mkb.config file will be looked like</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>#&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>Default options for mkb command.&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>You can specify any of the options listed --help in this file.&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>For example:&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>#&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>buildenv=VC6&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>no-make&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>#&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>rvct-version=none
+</span><span class='line'>default-buildenv=VC10</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -9,7 +9,7 @@
   <meta name="author" content="xnike">
 
   
-  <meta name="description" content="Upcoming Blackberry 10 release will have full theme support. According to the API Documentation there are Brigth and Dark themes: The default theme &hellip;">
+  <meta name="description" content="If you installed and configured for together work Visual C++ 2010 Express Edition and Marmalade SDK under Windows 8 and then try to run a &#8220; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +82,95 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/01/12/marmalade-sdk-and-a-non-admin-user-in-win8/">Marmalade SDK and a Non-admin User in Win8</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-12T12:41:00+04:00" pubdate data-updated="true">Jan 12<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/01/12/marmalade-sdk-and-a-non-admin-user-in-win8/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you installed and configured for together work Visual C++ 2010 Express Edition and Marmalade SDK under Windows 8 and then try to run a &#8220;Hello World&#8221; Marmalade example project by using Windows account without administrative rights, you can find in the console window the following error message <strong>&#8220;Visual Studio 6.0 requested but not found installed (MSDEV.EXE)&#8221;</strong>:</p>
+
+<p><img class="center" src="/images/posts/marmalade01.png"></p>
+
+<p>That is because you have no available configuration for your account, only defaults.</p>
+
+<p>This issue can be easily fixed in two steps:</p>
+
+<ol>
+<li>Defining S3E_DIR environment variable:</li>
+</ol>
+
+
+<p>a) create for you account S3E_DIR environment variable points to s3e subdirectory in you Marmalade SDK installation directory
+<img class="center" src="/images/posts/marmalade02.png">
+b) or change type of this environment variable from &#8220;user variable&#8221; to &#8220;system&#8221; for account from you installed Marmalade SDK
+<img class="center" src="/images/posts/marmalade03.png">
+2. Configuring Marmalade to use Visual C++ 2010 Express Edition:</p>
+
+<p>a) replace mkb.config file located in %USERPROFILE%\AppData\Roaming\Marmalade\ from the account with administrative rights;</p>
+
+<p>b) or just add to the end of the %USERPROFILE%\AppData\Roaming\Marmalade\mkb.config file following lines</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvct-version=none
+</span><span class='line'>default-buildenv=VC10</span></code></pre></td></tr></table></div></figure>
+
+
+<p>so the entire %USERPROFILE%\AppData\Roaming\Marmalade\mkb.config file will be looked like</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>##
+</span><span class='line'># Default options for mkb command.
+</span><span class='line'># You can specify any of the options listed --help in this file.
+</span><span class='line'># For example:
+</span><span class='line'>#
+</span><span class='line'># buildenv=VC6
+</span><span class='line'># no-make
+</span><span class='line'>##
+</span><span class='line'>rvct-version=none
+</span><span class='line'>default-buildenv=VC10</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/12/19/cascades-for-blackberry-10-theme-based-asset-selector/">Cascades for Blackberry 10. Theme Based Asset Selector</a></h1>
     
     
@@ -99,6 +188,8 @@
 
 
 <time datetime="2012-12-19T16:58:00+04:00" pubdate data-updated="true">Dec 19<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/12/19/cascades-for-blackberry-10-theme-based-asset-selector/#disqus_thread">Comments</a>
         
       </p>
     
@@ -202,6 +293,8 @@
 
 <time datetime="2012-11-11T19:38:00+04:00" pubdate data-updated="true">Nov 11<span>th</span>, 2012</time>
         
+         | <a href="/blog/2012/11/11/building-poco-to-use-with-bbndk/#disqus_thread">Comments</a>
+        
       </p>
     
   </header>
@@ -273,6 +366,8 @@
 
 <time datetime="2012-09-15T20:13:00+04:00" pubdate data-updated="true">Sep 15<span>th</span>, 2012</time>
         
+         | <a href="/blog/2012/09/15/zzz/#disqus_thread">Comments</a>
+        
       </p>
     
   </header>
@@ -297,6 +392,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/01/12/marmalade-sdk-and-a-non-admin-user-in-win8/">Marmalade SDK and a non-admin user in Win8</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/12/19/cascades-for-blackberry-10-theme-based-asset-selector/">Cascades for Blackberry 10. Theme based asset selector</a>
@@ -378,12 +477,25 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - xnike -
+  Copyright &copy; 2013 - xnike -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
 </footer>
   
+
+<script type="text/javascript">
+      var disqus_shortname = 'xnikeme';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 
