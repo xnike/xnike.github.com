@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: java | My Octopress Blog]]></title>
+  <link href="http://xnike.github.com/blog/categories/java/atom.xml" rel="self"/>
+  <link href="http://xnike.github.com/"/>
+  <updated>2013-06-02T19:17:50+04:00</updated>
+  <id>http://xnike.github.com/</id>
+  <author>
+    <name><![CDATA[xnike]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Java: inlining primitive types and Strings]]></title>
+    <link href="http://xnike.github.com/blog/2013/06/02/java-inlining-primitive-types-and-strings/"/>
+    <updated>2013-06-02T17:47:00+04:00</updated>
+    <id>http://xnike.github.com/blog/2013/06/02/java-inlining-primitive-types-and-strings</id>
+    <content type="html"><![CDATA[<p>At this moment, almost all IDEs and build systems can and actively use an increment build, i.e. recompile only changed files; so one time you could face the following issue: you change value of a constant in a one class, but get original value when use it in the another class.</p>
+
+<p>Assume we have the piece of code in 2 class files correspondingly:</p>
+
+<p>{% codeblock lang:java %}
+public class A {</p>
+
+<pre><code>public final static String s = "A";
+public final static int i = 1;
+</code></pre>
+
+<p>}</p>
+
+<p>public class B {</p>
+
+<pre><code>public static void main(String[] args) {
+    System.out.println("A.s = " + A.s + ", A.i = " + A.i);
+}
+</code></pre>
+
+<p>}
+{% endcodeblock %}</p>
+
+<p>After compiling classes and running, we get output:</p>
+
+<p>{% codeblock lang:bash %}
+$ javac A.java &amp;&amp; javac B.java &amp;&amp; java B
+A.s = A, A.i = 1
+{% endcodeblock %}</p>
+
+<p>In case of changing constants in A, recompiling it (only A.java) and then running B, we will receive the previous result. It's because compiler goes through constants in the class and checks each member whether or not it is an expression possible to compute at the compile time or the run time. A constant with the compile time computable value is a target for inlining.</p>
+
+<p>Let's edit the A class int the following way:</p>
+
+<p>{% codeblock lang:java %}
+public class A {</p>
+
+<pre><code>    public final static String s = "A".intern();
+    public final static int i = 1 + (int) Math.min(0, System.currentTimeMillis());
+</code></pre>
+
+<p>}
+{% endcodeblock %}</p>
+
+<p>And then recompile and run:</p>
+
+<p>{% codeblock lang:bash %}
+$ javac A.java &amp;&amp; javac B.java &amp;&amp; java B
+A.s = A, A.i = 1
+{% endcodeblock %}</p>
+
+<p>In case of changing constants in A and recompling only A, every running B we will receive correct constants values.
+You can easily find what are the differencies in the bytecodes of the two versions of produced classes by using standart JDK utility javap.</p>
+
+<p>For example, for the first version of A class we get:</p>
+
+<p>{% codeblock lang:bash %}
+$ javap -c A
+Compiled from "A.java"
+public class A {
+  public static final java.lang.String s;</p>
+
+<p>  public static final int i;</p>
+
+<p>  public A();</p>
+
+<pre><code>Code:
+   0: aload_0       
+   1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+   4: return        
+</code></pre>
+
+<p>}
+{% endcodeblock %}</p>
+
+<p>Welcome to the amazing modern Java World.</p>
+]]></content>
+  </entry>
+  
+</feed>

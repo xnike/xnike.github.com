@@ -9,7 +9,7 @@
   <meta name="author" content="xnike">
 
   
-  <meta name="description" content="If you installed and configured for together work Visual C++ 2010 Express Edition and Marmalade SDK under Windows 8 and then try to run a &#8220; &hellip;">
+  <meta name="description" content="At this moment, almost all IDEs and build systems can and actively use an increment build, i.e. recompile only changed files; so one time you could &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,138 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/02/java-inlining-primitive-types-and-strings/">Java: Inlining Primitive Types and Strings</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-02T17:47:00+04:00" pubdate data-updated="true">Jun 2<span>nd</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/02/java-inlining-primitive-types-and-strings/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At this moment, almost all IDEs and build systems can and actively use an increment build, i.e. recompile only changed files; so one time you could face the following issue: you change value of a constant in a one class, but get original value when use it in the another class.</p>
+
+<p>Assume we have the piece of code in 2 class files correspondingly:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">A</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">final</span> <span class="kd">static</span> <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;A&quot;</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">final</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">B</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;A.s = &quot;</span> <span class="o">+</span> <span class="n">A</span><span class="o">.</span><span class="na">s</span> <span class="o">+</span> <span class="s">&quot;, A.i = &quot;</span> <span class="o">+</span> <span class="n">A</span><span class="o">.</span><span class="na">i</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After compiling classes and running, we get output:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>javac A.java <span class="o">&amp;&amp;</span> javac B.java <span class="o">&amp;&amp;</span> java B
+</span><span class='line'>A.s <span class="o">=</span> A, A.i <span class="o">=</span> 1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In case of changing constants in A, recompiling it (only A.java) and then running B, we will receive the previous result. It&#8217;s because compiler goes through constants in the class and checks each member whether or not it is an expression possible to compute at the compile time or the run time. A constant with the compile time computable value is a target for inlining.</p>
+
+<p>Let&#8217;s edit the A class int the following way:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">A</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kd">public</span> <span class="kd">final</span> <span class="kd">static</span> <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;A&quot;</span><span class="o">.</span><span class="na">intern</span><span class="o">();</span>
+</span><span class='line'>        <span class="kd">public</span> <span class="kd">final</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">());</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And then recompile and run:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>javac A.java <span class="o">&amp;&amp;</span> javac B.java <span class="o">&amp;&amp;</span> java B
+</span><span class='line'>A.s <span class="o">=</span> A, A.i <span class="o">=</span> 1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In case of changing constants in A and recompling only A, every running B we will receive correct constants values.
+You can easily find what are the differencies in the bytecodes of the two versions of produced classes by using standart JDK utility javap.</p>
+
+<p>For example, for the first version of A class we get:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>javap -c A
+</span><span class='line'>Compiled from <span class="s2">&quot;A.java&quot;</span>
+</span><span class='line'>public class A <span class="o">{</span>
+</span><span class='line'>  public static final java.lang.String s;
+</span><span class='line'>
+</span><span class='line'>  public static final int i;
+</span><span class='line'>
+</span><span class='line'>  public A<span class="o">()</span>;
+</span><span class='line'>    Code:
+</span><span class='line'>       0: aload_0
+</span><span class='line'>       1: invokespecial <span class="c">#1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span>
+</span><span class='line'>       4: <span class="k">return</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Welcome to the amazing modern Java World.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -392,6 +524,10 @@ b) or change type of this environment variable from &#8220;user variable&#8221; 
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/06/02/java-inlining-primitive-types-and-strings/">Java: inlining primitive types and Strings</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/01/12/marmalade-sdk-and-a-non-admin-user-in-win8/">Marmalade SDK and a non-admin user in Win8</a>
