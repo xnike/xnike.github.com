@@ -9,7 +9,8 @@
   <meta name="author" content="xnike">
 
   
-  <meta name="description" content="At this moment, almost all IDEs and build systems can and actively use an increment build, i.e. recompile only changed files; so one time you could &hellip;">
+  <meta name="description" content="Do you want to change an application theme (from bright to dark and back)? Yes, you can.
+Do you want to do it in the runtime? No, you can not; a user &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +77,193 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/13/blackberry-10-changing-application-theme-in-runtime/">Blackberry 10: Changing Application Theme in Runtime</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-13T23:15:00+04:00" pubdate data-updated="true">Aug 13<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/13/blackberry-10-changing-application-theme-in-runtime/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Do you want to change an application theme (from bright to dark and back)? Yes, you can.</br>
+Do you want to do it in the runtime? No, you can not; a user has to restart the application to apply new theme.</p>
+
+<p>You can easily implement this as it is done in, for example, <a href="http://appworld.blackberry.com/webstore/content/2817/">FancyTran</a>.
+The application should update the installed application bar-descriptor.xml file according to the <a href="http://developer.blackberry.com/cascades/reference/bb__cascades__visualstyle.html">VisualStyle</a>.</br>
+<strong>Note</strong>: this trick is worked only with old notation:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;cascadesTheme>dark&lt;/cascadesTheme></span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add following code snippets to appropriate project files:</p>
+
+<figure class='code'><figcaption><span>applicationui.hpp</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">Q_INVOKABLE</span> <span class="kt">void</span> <span class="n">changeTheme</span><span class="p">(</span><span class="kt">int</span> <span class="n">type</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>applicationui.cpp</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">void</span> <span class="n">ApplicationUI</span><span class="o">::</span><span class="n">changeTheme</span><span class="p">(</span><span class="kt">int</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">!=</span> <span class="n">type</span> <span class="o">&amp;&amp;</span> <span class="mi">2</span> <span class="o">!=</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">const</span> <span class="n">QString</span> <span class="n">values</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;&lt;cascadesTheme&gt;bright&lt;/cascadesTheme&gt;&quot;</span><span class="p">,</span> <span class="s">&quot;&lt;cascadesTheme&gt;dark&lt;/cascadesTheme&gt;&quot;</span><span class="p">};</span>
+</span><span class='line'>        <span class="n">QFile</span> <span class="n">file</span><span class="p">(</span><span class="s">&quot;app/native/bar-descriptor.xml&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">QByteArray</span> <span class="n">content</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">file</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">QIODevice</span><span class="o">::</span><span class="n">ReadOnly</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>                <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>                <span class="n">content</span> <span class="o">=</span> <span class="n">file</span><span class="p">.</span><span class="n">readAll</span><span class="p">();</span>
+</span><span class='line'>                <span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">content</span><span class="p">.</span><span class="n">length</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">content</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">type</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="n">toAscii</span><span class="p">()))</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">file</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">QIODevice</span><span class="o">::</span><span class="n">WriteOnly</span> <span class="o">|</span> <span class="n">QIODevice</span><span class="o">::</span><span class="n">Text</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>                                <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>                        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>                                <span class="k">if</span> <span class="p">(</span><span class="n">content</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">type</span> <span class="o">%</span> <span class="mi">2</span><span class="p">].</span><span class="n">toAscii</span><span class="p">()))</span> <span class="p">{</span>
+</span><span class='line'>                                        <span class="n">content</span> <span class="o">=</span> <span class="n">content</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">type</span> <span class="o">%</span> <span class="mi">2</span><span class="p">].</span><span class="n">toAscii</span><span class="p">(),</span> <span class="n">values</span><span class="p">[</span><span class="n">type</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="n">toAscii</span><span class="p">());</span>
+</span><span class='line'>                                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>                                        <span class="n">content</span> <span class="o">=</span> <span class="n">content</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;&lt;/qnx&gt;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">type</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&lt;/qnx&gt;&quot;</span><span class="p">).</span><span class="n">toAscii</span><span class="p">());</span>
+</span><span class='line'>                                <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>                                <span class="n">file</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
+</span><span class='line'>                                <span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+</span><span class='line'>                        <span class="p">}</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, if you export application instance as context property in the applicationui.cpp</p>
+
+<figure class='code'><figcaption><span>applicationui.cpp</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">qml</span><span class="o">-&gt;</span><span class="n">setContextProperty</span><span class="p">(</span><span class="s">&quot;App&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>you can invoke implemented method from the QML:</p>
+
+<figure class='code'><figcaption><span>applicationui.cpp</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="p">....</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">DropDown</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nl">id:</span> <span class="n">themeDropDown</span>
+</span><span class='line'>    <span class="nl">title:</span> <span class="n">qsTr</span><span class="p">(</span><span class="s">&quot;Theme&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">Retranslate</span><span class="p">.</span><span class="n">onLocaleOrLanguageChanged</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">Option</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nl">text:</span> <span class="n">qsTr</span><span class="p">(</span><span class="s">&quot;Bright&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">Retranslate</span><span class="p">.</span><span class="n">onLocaleOrLanguageChanged</span>
+</span><span class='line'>        <span class="nl">value:</span> <span class="n">VisualStyle</span><span class="p">.</span><span class="n">Bright</span>
+</span><span class='line'>        <span class="nl">selected:</span> <span class="n">VisualStyle</span><span class="p">.</span><span class="n">Bright</span> <span class="o">==</span> <span class="n">Application</span><span class="p">.</span><span class="n">themeSupport</span><span class="p">.</span><span class="n">theme</span><span class="p">.</span><span class="n">colorTheme</span><span class="p">.</span><span class="n">style</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">Option</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nl">text:</span> <span class="n">qsTr</span><span class="p">(</span><span class="s">&quot;Dark&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">Retranslate</span><span class="p">.</span><span class="n">onLocaleOrLanguageChanged</span>
+</span><span class='line'>        <span class="nl">value:</span> <span class="n">VisualStyle</span><span class="p">.</span><span class="n">Dark</span>
+</span><span class='line'>        <span class="nl">selected:</span> <span class="n">VisualStyle</span><span class="p">.</span><span class="n">Dark</span> <span class="o">==</span> <span class="n">Application</span><span class="p">.</span><span class="n">themeSupport</span><span class="p">.</span><span class="n">theme</span><span class="p">.</span><span class="n">colorTheme</span><span class="p">.</span><span class="n">style</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">....</span>
+</span><span class='line'>
+</span><span class='line'><span class="nl">onSomething:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">App</span><span class="p">.</span><span class="n">changeTheme</span><span class="p">(</span><span class="n">themeDropDown</span><span class="p">.</span><span class="n">selectedValue</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Restart application and enjoy chosen theme.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -526,6 +714,10 @@ b) or change type of this environment variable from &#8220;user variable&#8221; 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/08/13/blackberry-10-changing-application-theme-in-runtime/">Blackberry 10: Changing application theme in runtime</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/02/java-inlining-primitive-types-and-strings/">Java: inlining primitive types and Strings</a>
       </li>
     
@@ -539,10 +731,6 @@ b) or change type of this environment variable from &#8220;user variable&#8221; 
     
       <li class="post">
         <a href="/blog/2012/11/11/building-poco-to-use-with-bbndk/">Building POCO to use with BBNDK</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/09/15/zzz/">zzz</a>
       </li>
     
   </ul>
