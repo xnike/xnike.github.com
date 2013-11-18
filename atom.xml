@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://xnike.github.com/atom.xml" rel="self"/>
   <link href="http://xnike.github.com/"/>
-  <updated>2013-09-19T19:56:49+04:00</updated>
+  <updated>2013-11-18T20:16:27+04:00</updated>
   <id>http://xnike.github.com/</id>
   <author>
     <name><![CDATA[xnike]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[XPCOM error 0x80004005]]></title>
+    <link href="http://xnike.github.com/blog/2013/11/18/xpcom-error-0x80004005/"/>
+    <updated>2013-11-18T20:08:00+04:00</updated>
+    <id>http://xnike.github.com/blog/2013/11/18/xpcom-error-0x80004005</id>
+    <content type="html"><![CDATA[<p>If you see &#8220;XPCOM error 0x80004005&#8221; error message on Momentics IDE&#8217;s Welcome page on Fedora 19 (x86_64), you should check for installed i686 xulrunner rpm package.</p>
+
+<p>To resolve missing package issue just type under root account or via sudo:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yum install xulrunner.i686</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Blackberry 10: Changing application theme in runtime]]></title>
