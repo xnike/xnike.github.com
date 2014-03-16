@@ -1,0 +1,11 @@
+Title: XPCOM error 0x80004005
+Date: 2013-11-18 20:08
+Tags: BBNDK, FEDORA, MOMENTICS IDE, X86_64
+
+If you see "XPCOM error 0x80004005" error message on Momentics IDE's Welcome page on Fedora 19 (x86_64), you should check for installed i686 xulrunner rpm package.
+
+
+To resolve missing package issue just type under root account or via sudo:
+```bash
+yum install xulrunner.i686
+```
