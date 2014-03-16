@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>xnike's blog</title><link href="http://xnike.me/" rel="alternate"></link><link href="http://xnike.me/feeds/misc.atom.xml" rel="self"></link><id>http://xnike.me/</id><updated>2013-11-18T20:08:00+04:00</updated><entry><title>XPCOM error 0x80004005</title><link href="http://xnike.me/blog/2013/11/18/xpcom-error-0x80004005/" rel="alternate"></link><updated>2013-11-18T20:08:00+04:00</updated><author><name>Nikolay Khramchenkov</name></author><id>tag:xnike.me,2013-11-18:blog/2013/11/18/xpcom-error-0x80004005/</id><summary type="html">&lt;p&gt;If you see "XPCOM error 0x80004005" error message on Momentics IDE's Welcome page on Fedora 19 (x86_64), you should check for installed i686 xulrunner rpm package.&lt;/p&gt;
+&lt;p&gt;To resolve missing package issue just type under root account or via sudo:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;yum install xulrunner.i686
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="BBNDK"></category><category term="FEDORA"></category><category term="MOMENTICS IDE"></category><category term="X86_64"></category></entry><entry><title>Blackberry 10: Changing application theme in runtime</title><link href="http://xnike.me/blog/2013/08/13/blackberry-10-changing-application-theme-in-runtime/" rel="alternate"></link><updated>2013-08-13T23:15:00+04:00</updated><author><name>Nikolay Khramchenkov</name></author><id>tag:xnike.me,2013-08-13:blog/2013/08/13/blackberry-10-changing-application-theme-in-runtime/</id><summary type="html">&lt;p&gt;Do you want to change an application theme (from bright to dark and back)? Yes, you can.&lt;/br&gt;
+Do you want to do it in the runtime? No, you can not; a user has to restart the application to apply new theme.&lt;/p&gt;
+&lt;p&gt;You can easily implement this as it is done in, for example, &lt;a href="http://appworld.blackberry.com/webstore/content/2817/"&gt;FancyTran&lt;/a&gt;.
+The application should update the installed application bar-descriptor.xml file according to the &lt;a href="http://developer.blackberry.com/cascades/reference/bb__cascades__visualstyle.html"&gt;VisualStyle&lt;/a&gt;.&lt;/br&gt;
+&lt;strong&gt;Note&lt;/strong&gt;: this trick is worked only with old notation: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;cascadesTheme&amp;gt;&lt;/span&gt;dark&lt;span class="nt"&gt;&amp;lt;/cascadesTheme&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Add following code snippets to appropriate project files:&lt;/p&gt;
+&lt;p&gt;applicationui.hpp:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Q_INVOKABLE&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;changeTheme&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;applicationui.cpp:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;ApplicationUI&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;changeTheme&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;type&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+
+        &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;QString&lt;/span&gt; &lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;cascadesTheme&amp;gt;bright&amp;lt;/cascadesTheme&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;cascadesTheme&amp;gt;dark&amp;lt;/cascadesTheme&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;};&lt;/span&gt;
+        &lt;span class="n"&gt;QFile&lt;/span&gt; &lt;span class="nf"&gt;file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;app/native/bar-descriptor.xml&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;QByteArray&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;QIODevice&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;ReadOnly&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;readAll&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+                &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;type&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;toAscii&lt;/span&gt;&lt;span class="p"&gt;()))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;QIODevice&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;WriteOnly&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;QIODevice&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;Text&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                                &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                        &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;type&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;toAscii&lt;/span&gt;&lt;span class="p"&gt;()))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                                        &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;type&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;toAscii&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;type&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;toAscii&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+                                &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                                        &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;/qnx&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;type&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;lt;/qnx&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;toAscii&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+                                &lt;span class="p"&gt;}&lt;/span&gt;
+
+                                &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+                                &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+                        &lt;span class="p"&gt;}&lt;/span&gt;
+                &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So, if you export application instance as context property in the applicationui.cpp&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;qml&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;setContextProperty&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;App&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;you can invoke implemented method from the QML:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;....&lt;/span&gt;
+
+&lt;span class="n"&gt;DropDown&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nl"&gt;id:&lt;/span&gt; &lt;span class="n"&gt;themeDropDown&lt;/span&gt;
+    &lt;span class="nl"&gt;title:&lt;/span&gt; &lt;span class="n"&gt;qsTr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Theme&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Retranslate&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;onLocaleOrLanguageChanged&lt;/span&gt;
+
+    &lt;span class="n"&gt;Option&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nl"&gt;text:&lt;/span&gt; &lt;span class="n"&gt;qsTr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Bright&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Retranslate&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;onLocaleOrLanguageChanged&lt;/span&gt;
+        &lt;span class="nl"&gt;value:&lt;/span&gt; &lt;span class="n"&gt;VisualStyle&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Bright&lt;/span&gt;
+        &lt;span class="nl"&gt;selected:&lt;/span&gt; &lt;span class="n"&gt;VisualStyle&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Bright&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;Application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;themeSupport&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;theme&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;colorTheme&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;style&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="n"&gt;Option&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nl"&gt;text:&lt;/span&gt; &lt;span class="n"&gt;qsTr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Dark&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Retranslate&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;onLocaleOrLanguageChanged&lt;/span&gt;
+        &lt;span class="nl"&gt;value:&lt;/span&gt; &lt;span class="n"&gt;VisualStyle&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Dark&lt;/span&gt;
+        &lt;span class="nl"&gt;selected:&lt;/span&gt; &lt;span class="n"&gt;VisualStyle&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Dark&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;Application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;themeSupport&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;theme&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;colorTheme&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;style&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="p"&gt;....&lt;/span&gt;
+
+&lt;span class="nl"&gt;onSomething:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;App&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;changeTheme&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;themeDropDown&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;selectedValue&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Restart application and enjoy chosen theme.&lt;/p&gt;</summary><category term="Blackberry 10"></category><category term="Cascades"></category><category term="Qt"></category><category term="Theme"></category></entry><entry><title>Java: inlining primitive types and Strings</title><link href="http://xnike.me/blog/2013/06/02/java-inlining-primitive-types-and-strings/" rel="alternate"></link><updated>2013-06-02T17:47:00+04:00</updated><author><name>Nikolay Khramchenkov</name></author><id>tag:xnike.me,2013-06-02:blog/2013/06/02/java-inlining-primitive-types-and-strings/</id><summary type="html">&lt;p&gt;At this moment, almost all IDEs and build systems can and actively use an increment build, i.e. recompile only changed files; so one time you could face the following issue: you change value of a constant in a one class, but get original value when use it in the another class.&lt;/p&gt;
+&lt;p&gt;Assume we have the piece of code in 2 class files correspondingly:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;A&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;final&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;A&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;final&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;B&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;out&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;println&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;A.s = &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;s&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;, A.i = &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;i&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;After compiling classes and running, we get output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;javac A.java &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; javac B.java &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; java B
+A.s &lt;span class="o"&gt;=&lt;/span&gt; A, A.i &lt;span class="o"&gt;=&lt;/span&gt; 1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In case of changing constants in A, recompiling it (only A.java) and then running B, we will receive the previous result. It's because compiler goes through constants in the class and checks each member whether or not it is an expression possible to compute at the compile time or the run time. A constant with the compile time computable value is a target for inlining.&lt;/p&gt;
+&lt;p&gt;Let's edit the A class int the following way:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;A&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;final&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;A&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;intern&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+        &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;final&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="n"&gt;Math&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;min&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;currentTimeMillis&lt;/span&gt;&lt;span class="o"&gt;());&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And then recompile and run:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;javac A.java &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; javac B.java &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; java B
+A.s &lt;span class="o"&gt;=&lt;/span&gt; A, A.i &lt;span class="o"&gt;=&lt;/span&gt; 1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In case of changing constants in A and recompling only A, every running B we will receive correct constants values.
+You can easily find what are the differencies in the bytecodes of the two versions of produced classes by using standart JDK utility javap.&lt;/p&gt;
+&lt;p&gt;For example, for the first version of A class we get:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;javap -c A
+Compiled from &lt;span class="s2"&gt;&amp;quot;A.java&amp;quot;&lt;/span&gt;
+public class A &lt;span class="o"&gt;{&lt;/span&gt;
+  public static final java.lang.String s;
+
+  public static final int i;
+
+  public A&lt;span class="o"&gt;()&lt;/span&gt;;
+    Code:
+       0: aload_0       
+       1: invokespecial &lt;span class="c"&gt;#1                  // Method java/lang/Object.&amp;quot;&amp;lt;init&amp;gt;&amp;quot;:()V&lt;/span&gt;
+       4: &lt;span class="k"&gt;return&lt;/span&gt;        
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Welcome to the amazing modern Java World.&lt;/p&gt;</summary><category term="java"></category></entry><entry><title>Marmalade SDK and a non-admin user in Win8</title><link href="http://xnike.me/blog/2013/01/12/marmalade-sdk-and-a-non-admin-user-in-win8/" rel="alternate"></link><updated>2013-01-12T12:41:00+04:00</updated><author><name>Nikolay Khramchenkov</name></author><id>tag:xnike.me,2013-01-12:blog/2013/01/12/marmalade-sdk-and-a-non-admin-user-in-win8/</id><summary type="html">&lt;p&gt;If you installed and configured for together work Visual C++ 2010 Express Edition and Marmalade SDK under Windows 8 and then try to run a "Hello World" Marmalade example project by using Windows account without administrative rights, you can find in the console window the following error message &lt;strong&gt;"Visual Studio 6.0 requested but not found installed (MSDEV.EXE)"&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Error example" src="http://xnike.me/images/marmalade/marmalade01.png" /&gt;&lt;/p&gt;
+&lt;p&gt;That is because you have no available configuration for your account, only defaults.&lt;/p&gt;
+&lt;p&gt;This issue can be easily fixed in two steps:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1 Defining S3E_DIR environment variable:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;a) create for you account S3E_DIR environment variable points to s3e subdirectory in you Marmalade SDK installation directory
+&lt;img alt="Changing environment variables" src="http://xnike.me/images/marmalade/marmalade02.png" /&gt;
+b) or change type of this environment variable from "user variable" to "system" for account from you installed Marmalade SDK
+&lt;img alt="Changing S3E_DIR environment variable" src="http://xnike.me/images/marmalade/marmalade03.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2 Configuring Marmalade to use Visual C++ 2010 Express Edition:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;a) replace mkb.config file located in %USERPROFILE%\AppData\Roaming\Marmalade\ from the account with administrative rights;&lt;/p&gt;
+&lt;p&gt;b) or just add to the end of the %USERPROFILE%\AppData\Roaming\Marmalade\mkb.config file following lines&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;rvct-version&lt;span class="o"&gt;=&lt;/span&gt;none
+default-buildenv&lt;span class="o"&gt;=&lt;/span&gt;VC&lt;span class="m"&gt;10&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;so the entire %USERPROFILE%\AppData\Roaming\Marmalade\mkb.config file will be looked like&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;##
+# Default options &lt;span class="k"&gt;for&lt;/span&gt; mkb command.
+# You can specify any of the options listed --help in this file.
+# &lt;span class="k"&gt;For&lt;/span&gt; example:
+#
+# buildenv&lt;span class="o"&gt;=&lt;/span&gt;VC&lt;span class="m"&gt;6&lt;/span&gt;
+# no-make
+##
+rvct-version&lt;span class="o"&gt;=&lt;/span&gt;none
+default-buildenv&lt;span class="o"&gt;=&lt;/span&gt;VC&lt;span class="m"&gt;10&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="Blackberry"></category><category term="BB10"></category><category term="Marmalade"></category><category term="PlayBook"></category><category term="Windows 8"></category></entry><entry><title>"Cascades for Blackberry 10. Theme based asset selector</title><link href="http://xnike.me/blog/2012/12/19/cascades-for-blackberry-10-theme-based-asset-selector/" rel="alternate"></link><updated>2012-12-19T16:58:00+04:00</updated><author><name>Nikolay Khramchenkov</name></author><id>tag:xnike.me,2012-12-19:blog/2012/12/19/cascades-for-blackberry-10-theme-based-asset-selector/</id><summary type="html">&lt;p _="%" center="center" https:_developer.blackberry.com_cascades_files_reference_images_theme_examples.png="https://developer.blackberry.com/cascades/files/reference/images/theme_examples.png" img="img"&gt;Upcoming Blackberry 10 release will have full theme support. According to the &lt;a href="https://developer.blackberry.com/cascades/reference/bb__cascades__themesupport.html"&gt;API Documentation&lt;/a&gt; there are Brigth and Dark themes:&lt;/p&gt;
+&lt;p&gt;The default theme is Bright. To change the application theme to Dark specify the following configuration value in the application`s bar-descriptor.xml file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt; &lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;CASCADES_THEME&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;dark&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;or previously&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;cascadesTheme&amp;gt;&lt;/span&gt;dark&lt;span class="nt"&gt;&amp;lt;/cascadesTheme&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If You have, for example, a background image for each of the available themes - "asset:///images/bright/background.png" and "asset:///images/dark/background.png" - You can easily manage it by adding a globally available property:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kr"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;bb&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;cascades&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;
+
+&lt;span class="nx"&gt;Page&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;id&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;mainPage&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// this property will contain string representation of the current application theme.&lt;/span&gt;
+    &lt;span class="nx"&gt;property&lt;/span&gt; &lt;span class="nx"&gt;string&lt;/span&gt; &lt;span class="nx"&gt;theme&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;themeStyleToString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;Application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;themeSupport&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;theme&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;colorTheme&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;style&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+    &lt;span class="nx"&gt;Container&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;ImageView&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="nx"&gt;imageSource&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;asset:///images/&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;mainPage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;theme&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/background.png&amp;quot;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;       
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;themeStyleToString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;style&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;switch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;style&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="nx"&gt;VisualStyle&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Bright&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;bright&amp;quot;&lt;/span&gt;
+            &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="nx"&gt;VisualStyle&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Dark&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;dark&amp;quot;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+
+        &lt;span class="c1"&gt;// will use dark as default in case of unknown&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;dark&amp;quot;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Unfortunately, right now I know only one way to change the application theme - via bar-descriptor.xml.&lt;/p&gt;</summary><category term="[BB10"></category><category term="BBNDK"></category><category term="Blackberry"></category><category term="Cascades"></category><category term="QML"></category></entry><entry><title>Building POCO to use with BBNDK</title><link href="http://xnike.me/blog/2012/11/11/building-poco-to-use-with-bbndk/" rel="alternate"></link><updated>2012-11-11T19:38:00+04:00</updated><author><name>Nikolay Khramchenkov</name></author><id>tag:xnike.me,2012-11-11:blog/2012/11/11/building-poco-to-use-with-bbndk/</id><summary type="html">&lt;p&gt;On the GitHub page of &lt;a href="https://github.com/falcon4ever/openFrameworks/tree/developPlayBook/addons/ofxQNX/libs/poco/Sources"&gt;OpenFramework project&lt;/a&gt; there is a guide that shows how to build &lt;a href="http://pocoproject.org"&gt;POCO C++ libraries&lt;/a&gt; for Blackberry 10 and Playbook on your Linux or Mac OS box.&lt;/p&gt;
+&lt;p&gt;These steps are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Download and install the BlackBerry Native SDK for your platform from the &lt;a href="https://developer.blackberry.com/cascades/download/"&gt;Cascade&lt;/a&gt; or &lt;a href="http://developer.blackberry.com/native/download/"&gt;Native&lt;/a&gt; downloads page.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Download a stable release from the project &lt;a href="http://pocoproject.org/download/index.html"&gt;downloads page&lt;/a&gt;. Basic Edition is enough because crypto, mysql, odbc, openssl support will be ommited during the build process. For now, the latest release is &lt;a href="https://sourceforge.net/projects/poco/files/sources/poco-1.4.4/poco-1.4.4.tar.gz/download"&gt;1.4.4&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Extract the downloaded archive file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create directories for one or several of the available building targets for which you need to compile the library: BB10 simulator, BB10 target, Playbook simulator, Playbook target.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Download the appropriate configuration profile(s) &lt;a href="https://github.com/falcon4ever/openFrameworks/blob/developPlayBook/addons/ofxQNX/libs/poco/Sources/QNX-bb10-sim"&gt;BB10 simulator&lt;/a&gt;, &lt;a href="https://github.com/falcon4ever/openFrameworks/blob/developPlayBook/addons/ofxQNX/libs/poco/Sources/QNX-bb10-device"&gt;BB10 target&lt;/a&gt;, &lt;a href="https://github.com/falcon4ever/openFrameworks/blob/developPlayBook/addons/ofxQNX/libs/poco/Sources/QNX-playbook-sim"&gt;Playbook simulator&lt;/a&gt;, &lt;a href="https://github.com/falcon4ever/openFrameworks/blob/developPlayBook/addons/ofxQNX/libs/poco/Sources/QNX-playbook-device"&gt;Playbook target&lt;/a&gt; and store it (them) to the "Unpacked POCO root"\build\config directory.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Download &lt;a href="https://github.com/falcon4ever/openFrameworks/blob/developPlayBook/addons/ofxQNX/libs/poco/Sources/syslog.h"&gt;syslog.h&lt;/a&gt; and copy it to "SDK root"\target\qnx6\usr\include directory.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Build library for the chosen configuration profile and then add it to your project.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Load the environment variables for the console session:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;source&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;SDK root&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bbndk&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Configuring build:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Unpacked POCO root&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;configure&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Profile file name&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;omit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;NetSSL_OpenSSL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;Crypto&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;Data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ODBC&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;Data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;MySQL&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;no&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;tests&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;no&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;samples&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Profile result directory&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Compiling and installing result of the build in the "Profile result directory":&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;make&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;
+&lt;span class="n"&gt;make&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="BB10"></category><category term="BBNDK"></category><category term="BB10"></category><category term="Blackberry"></category><category term="Cascades"></category><category term="C++"></category><category term="Native"></category><category term="Playbook"></category><category term="POCO"></category><category term="QNX"></category></entry></feed>
