@@ -1,4 +1,4 @@
-Title: "Cascades for Blackberry 10. Theme based asset selector
+Title: Cascades for Blackberry 10. Theme based asset selector
 Date: 2012-12-19 16:58
 Tags: [BB10, BBNDK, Blackberry, Cascades, QML
 
