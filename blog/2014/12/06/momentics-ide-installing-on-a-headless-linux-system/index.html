@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>xnike's blog - Qt</title>
+  <title>Momentics IDE: Installing on a headless Linux system.</title>
   <meta name="author" content="Nikolay Khramchenkov">
 
 
@@ -43,32 +43,62 @@
 </ul></nav>
   <div id="main">
     <div id="content">
-<div class="blog-index">
-  		<article>
+<div>
+  <article class="hentry" role="article">
 <header>
-      <h1 class="entry-title">
-        <a href="/blog/2013/08/13/blackberry-10-changing-application-theme-in-runtime/">Blackberry 10: Changing application theme in runtime</a>
-      </h1>
-      <p class="meta"><time datetime="2013-08-13T23:15:00+04:00" pubdate>Tue 13 August 2013</time></p>
+      <h1 class="entry-title">Momentics IDE: Installing on a headless Linux system.</h1>
+      <p class="meta"><time datetime="2014-12-06T23:59:00+03:00" pubdate>Sat 06 December 2014</time></p>
 </header>
 
-  <div class="entry-content"><p>Do you want to change an application theme (from bright to dark and back)? Yes, you can.</br>
-Do you want to do it in the runtime? No, you can not; a user has to restart the application to apply new theme.</p>
-<p>You can easily implement this as it is done ...</p></div>
-  <footer>
-    <a rel="full-article" href="/blog/2013/08/13/blackberry-10-changing-application-theme-in-runtime/">Read On &crarr;</a>
-  </footer>
-  		</article>
-<div class="pagination">
+  <div class="entry-content"><p>Assume you wish to use <a href="http://jenkins-ci.org/">Jenkins</a> to build your BlackBerry 10 applications on a headless Linux system.</p>
+<p>In this case on attempt to install SDK via ./sdkinstall you could face with the following error:</p>
+<div class="highlight"><pre><span class="n">Qde</span><span class="o">:</span> <span class="n">Cannot</span> <span class="n">open</span> <span class="n">display</span><span class="o">:</span> 
+<span class="n">Qde</span><span class="o">:</span> <span class="n">Cannot</span> <span class="n">open</span> <span class="n">display</span><span class="o">:</span> 
+<span class="n">Qde</span><span class="o">:</span>
+<span class="n">An</span> <span class="n">error</span> <span class="n">has</span> <span class="n">occurred</span><span class="o">.</span> <span class="n">See</span> <span class="n">the</span> <span class="n">log</span> <span class="n">file</span>
+</pre></div>
 
-  <br />
-</div></div>
+
+<p>This issue could be fixed by in 4 simple steps:</p>
+<p>a) install xorg-x11-xauth package</p>
+<p>b) uncomment line "#X11UseLocalhost yes" in /etc/ssh/sshd_config</p>
+<p>c) reboot system to apply new package and settings</p>
+<p>d) reconnect to system via ssh using -X option (enabled X11 forwarding).</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Nikolay Khramchenkov</span>
+  </span>
+<time datetime="2014-12-06T23:59:00+03:00" pubdate>Sat 06 December 2014</time>  <span class="categories">
+    <a class="category" href="/tag/bb10.html">BB10</a>
+    <a class="category" href="/tag/bbndk.html">BBNDK</a>
+    <a class="category" href="/tag/blackberry-10.html">BlackBerry 10</a>
+    <a class="category" href="/tag/linux.html">Linux</a>
+    <a class="category" href="/tag/momentics-ide.html">Momentics IDE</a>
+  </span>
+</p><div class="sharing">
+</div>    </footer>
+  </article>
+
+</div>
 <aside class="sidebar">
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="/blog/2014/12/06/momentics-ide-installing-on-a-headless-linux-system/">Momentics IDE: Installing on a headless Linux system.</a>
+      </li>
+      <li class="post">
+          <a href="/blog/2014/09/07/blackberry-10-creating-unit-tests-for-js/">BlackBerry 10: Creating unit tests for JS.</a>
+      </li>
+      <li class="post">
+          <a href="/blog/2013/11/18/xpcom-error-0x80004005/">XPCOM error 0x80004005</a>
+      </li>
+      <li class="post">
           <a href="/blog/2013/08/13/blackberry-10-changing-application-theme-in-runtime/">Blackberry 10: Changing application theme in runtime</a>
+      </li>
+      <li class="post">
+          <a href="/blog/2013/06/02/java-inlining-primitive-types-and-strings/">Java: inlining primitive types and Strings</a>
       </li>
     </ul>
   </section>
@@ -90,7 +120,7 @@ Do you want to do it in the runtime? No, you can not; a user has to restart the 
 </aside>    </div>
   </div>
   <footer role="contentinfo"><p>
-    Copyright &copy;  2013  - Nikolay Khramchenkov -
+    Copyright &copy;  2012-2014  - Nikolay Khramchenkov -
   <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
 </p></footer>
 </body>
