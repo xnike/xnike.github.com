@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>BlackBerry World Apps &mdash; xnike's blog</title>
+  <meta name="author" content="Nikolay Khramchenkov">
+
+  <link href="http://xnike.me/feeds/all.atom.xml" type="application/rss+xml" rel="alternate"
+        title="xnike's blog RSS Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="http://xnike.me/favicon.png" rel="icon">
+
+  <link href="http://xnike.me/theme/css/main.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+        
+  <script src="http://xnike.me/theme/js/angular.min.js" type="text/javascript"></script>
+  <script src="http://xnike.me/theme/js/angular-sanitize.min.js" type="text/javascript"></script>
+  <script src="http://xnike.me/theme/js/ui-bootstrap-tpls-0.12.0.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://xnike.me/">xnike's blog</a></h1>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://xnike.me/feeds/all.atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+
+<form action="https://duckduckgo.com" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sites" value="xnike.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<ul class="main-navigation">
+    <li><a href="/">xnike's blog</a></li>
+    <li><a href="archives.html">Archives</a></li>
+      <li><a href="http://xnike.me/pages/blackberry-world-apps.html">BlackBerry World Apps</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article role="article">
+    <header>
+    
+    <div id="qr-code-pages/blackberry-world-apps-ru.html" class="qr-code-image-block"></div>
+    <script src="http://xnike.me/theme/js/qr.min.js" type="text/javascript"></script>
+    <script>
+        var img = qr.image({
+            value: 'http://xnike.me/pages/blackberry-world-apps-ru.html',
+            level: 'L',
+            size: 4
+        });
+        document.getElementById('qr-code-pages/blackberry-world-apps-ru.html').appendChild(img);
+    </script>
+      <h1 class="entry-title">BlackBerry World Apps</h1>
+    </header>
+    
+        <script>
+            angular.module('ui.bootstrap.blackberry.apps', ['ngSanitize', 'ui.bootstrap']);
+            angular.module('ui.bootstrap.blackberry.apps').controller('CarouselCtrl', function ($scope) {
+                $scope.myInterval = 0;
+                $scope.selectedSlide = {};
+                var slides = $scope.slides = [];
+
+                slides.push({
+                    image: 'http://appworld.blackberry.com/webstore/servedimages/15438138.png/?t=12',
+                    text: 'DjVu Reader',
+                    description: 'Приложение "DjVu Reader" для BlackBerry® 10 позволяет Вашему BlackBerry® 10 устройству читать Ваши любимые DjVu книги и документы.<br><br>\
+<h3><strong>Функционал</strong>:</h3>\
+<ol>\
+<li>Сохранение в закладках текущей страницы и настроек чтения документа.</li>\
+<li>Ведение истории открытых документов.</li>\
+<li>Автоматическое открытие последнего документа на старте приложения.</li>\
+<li>Интеграция с Менеджером Файлов.</li>\
+<li>Расшаривание документов.</li>\
+<li>Расширенные параметры отображения страницы документа: увеличение/уменьшение, обрезание границ, поворот, инвертированные цвета.</li>\
+</ol>',
+                    releases: [
+                        {version: '0.0.1.3 (2014/09/08, OS 10.2+)', description: 'Обновление интерфейса; добавлены проверки на открытие поврежденных файлов.'},
+                        {version: '0.0.1.2 (2014/09/08, OS 10.2+)', description: 'Обновление интерфейса; поправлены ошибки интерфейса специфичные для ОС 10.3+; добавлен предпросмотр документов в закладках и избранном.'},
+                        {version: '0.0.1.1 (2014/08/27, OS 10.2+)', description: 'Добавлен отработчик парсинга поврежденной страницы документа - будет показываться белая (черная) страница.'},
+                        {version: '0.0.0.9 (2014/08/20, OS 10.2+)', description: 'Обновление интерфейса, добавлен режим инвертивания цветов. Добавлены шорткаты для серии Q. Добавлена настройка для использования аппаратных клавиш управления громкостью для перехода к предыдущей/следующей странице документа.'},
+                        {version: '0.0.0.8 (2014/08/05, OS 10.2+)', description: 'Добавлена экспериментальная реализация управления жестами для перехода на предыдущую/следующую страницы документа (включается на странице настроек). Улучшена асинхронность рендеринга страницы документа.'},
+                        {version: '0.0.0.7 (2014/07/30, OS 10.2+)', description: 'Обновление интерфейса. Добавлен кеширование последних 8 страниц. Исправлена смена темы приложения.'},
+                        {version: '0.0.0.6 (2013/08/19, OS 10.1+)', description: 'Обновление интерфейса. Добавлены параметры отображения документа: увеличение/уменьшение, обрезание границ, поворот.'},
+                        {version: '0.0.0.5 (2013/08/13, OS 10.1+)', description: 'Поправлена отображение чёрного экрана вместо содержимого документа, добавлено расшаривание документа системными средствами.'},
+                        {version: '0.0.0.4 (2013/06/24, OS 10.1+)', description: 'Обновление интерфейса. Добавлен перевод русской локали.'},
+                        {version: '0.0.0.3 (2013/05/27, OS 10.1+)', description: 'Обновление интерфейса.'},
+                        {version: '0.0.0.2 (2013/05/06, OS 10.1+)', description: 'Первый публичный релиз. Функционал: жестовое управление для увеличения/уменьшения страницы документа, закладки, список последних открытых документов, active frame.'}
+                    ],
+                    url: 'http://appworld.blackberry.com/webstore/content/27847850'
+                });
+
+                slides.push({
+                    image: 'http://appworld.blackberry.com/webstore/servedimages/37934562.png/?t=12',
+                    text: 'Шутки',
+                    description: 'Приложение "Шутки" для BlackBerry® 10 является клиентом к популярным сайтам с шутками на английском, немецком, французском и русском языках: anekdot.ru, bash.im, bash.org, besit2.ru, cmex2.ru, dearblankpleaseblank.com, delonevtebe.ru, det.org.ru, everydaylifelessons.com, ibash.org.ru, ithappens.ru, killmeplz.ru, makesmethink.com, muzey-factov.ru, nextjoke.net, nya.sh, qdb.us, pip.ec, shortiki.com, vayamierdadevida.com, whatmoneycannotbuy.com, zadolba.li и многим другим.<br><br>\
+<h3><strong>Функционал</strong>:</h3>\
+<ol>\
+<li>Кеширование контента источников.</li>\
+<li>Настойка цвета и размера шрифта.</li>\
+<li>Настройка периода обновления источников.</li>\
+<li>Копирование в буфер обмена и расшаривание шуток.</li>\
+<li>Вкладка избранных шуток.</li>\
+<li>Выбор одной из системных тем для приложения.</li>\
+</ol>',
+                    releases: [
+                        {version: '1.0.3.1 (2014/11/24, OS 10.3.1+)', description: 'Внимание!!! С данного момента доступ к странице с настройками является премиум функционалом. Добавлены новые источники: breakingmad.me и justwunder.com'},
+                        {version: '1.0.2.7 (2014/09/01, OS 10.2+)', description: 'Добавлены 2 новых источника с картинками: atkritka.com, xkcd.com.'},
+                        {version: '1.0.2.6 (2014/08/12, OS 10.2+)', description: 'Добавлены новые источники. Исправлена поддержка источника ithappens.me.'},
+                        {version: '1.0.2.5 (2014/07/30, OS 10.2+)', description: 'Добавлены 3 новых источника: 2 русских и 1 украинский. Исправлен выбор темы приложения.'},
+                        {version: '1.0.2.4 (2014/07/15, OS 10.2+)', description: 'Добавлена аналитика от Flurry. Добавлены 2 новых источника.'},
+                        {version: '1.0.2.3 (2014/05/16, OS 10.2+)', description: 'Поправлена страница соглашения.'},
+                        {version: '1.0.2.1 (2014/05/05, OS 10.2+)', description: 'Добавлены новые английские и русские источники. Добавлена настойка для автоматического обновления источников. Исправление ошибок.'},
+                        {version: '1.0.2.0 (2014/05/02, OS 10.2+)', description: 'Обновление интерфейса. Добавлен новый источник dearlbankpleaseblank.com.'},
+                        {version: '1.0.1.7 (2014/01/29, OS 10.2+)', description: 'Обновлен парсинг сменившего дизайн источника anekdot.ru.'},
+                        {version: '1.0.1.6 (2013/11/12, OS 10.1+)', description: 'Добавлены новые источники, настройка для закрепления заголовка.'},
+                        {version: '1.0.1.5 (2013/09/20, OS 10.1+)', description: 'Добавлен новый источник source pip.ec, ссылка на используемую приложением Политику Конфиденциальности.'},
+                        {version: '1.0.1.4 (2013/09/16, OS 10.1+)', description: 'Поправлен выбор темы приложения. Добавлены новые источники: anekdot.ru и besit2.ru.'},
+                        {version: '1.0.1.3 (2013/09/13, OS 10.1+)', description: 'Улучшение в парсинге данных источников.'},
+                        {version: '1.0.1.2 (2013/09/02, OS 10.1+)', description: 'Обновление интерфейса согласно правилам платформы.'},
+                        {version: '1.0.1.1 (2013/08/30, OS 10.1+)', description: 'Обновление интерфейса.'},
+                        {version: '1.0.0.9 (2013/08/27, OS 10.1+)', description: 'Обновление интерфейса, добавлены новые источники.'},
+                        {version: '1.0.0.8 (2013/08/23, OS 10.1+)', description: 'Улучшена поддержка BBM, обновлен интерфейс страницы О приложении, ипользуется системный формат времени.'},
+                        {version: '1.0.1.7 (2013/08/21, OS 10.1+)', description: 'Добавлена поддержка BBM, active cover. Поправлен перевод локалей.'},
+                        {version: '1.0.1.6 (2013/08/19, OS 10.1+)', description: 'Обновление интерфейса. Добавлена поддержка расшаривания шуток.'}
+                    ],
+                    url: 'http://appworld.blackberry.com/webstore/content/34369887'
+                });
+
+                slides.push({
+                    image: 'http://appworld.blackberry.com/webstore/servedimages/37359951.png/?t=12',
+                    text: 'Дорожный компаньон',
+                    description: 'Приложение "Дорожный компаньон" для BlackBerry® 10 поможет Вам изучить и успешно сдать теоретический экзамен по Правилам дорожного движения.<br><br>\
+<h3><strong>Функционал</strong>:</h3>\
+<ol>\
+<li>Модульная система: Вы можете загружать в приложении только нужные именно Вам пакеты.</li>\
+<li>Поддержка нескольких стран и языков: Россия, Украина.</li>\
+<li>Последние и актуальные экзаменационные вопросы.</li>\
+<li>История таблиц штрафов.</li>\
+<li>Коды регионов регистрации автомобилей для России.</li>\
+</ol>',
+                    releases: [
+                        {version: '1.0.1.5 (2014/12/01, OS 10.3.1+)', description: 'Добавлены ограничения на бесплатную версию приложения: можно установить не более двух пакетов и только одной страны. Минимальная поддерживаемая версия ОС теперь 10.3.1.'},
+                        {version: '1.0.1.4 (2014/09/08, OS 10.2+)', description: 'Обновление интерфейса.'},
+                        {version: '1.0.1.3 (2014/08/26, OS 10.2+)', description: 'Обновлен перевод русской локали. Добавлена поддержка новых версий пакетов.'},
+                        {version: '1.0.1.2 (2014/07/14, OS 10.2+)', description: 'Добавлена поддержка новых версий пакетов, улучшена поддержка работы с несколькими языками.'},
+                        {version: '1.0.1.1 (2014/05/16, OS 10.2+)', description: 'Исправлены опечатки. Обновлено страница настроек приложения.'},
+                        {version: '1.0.1.0 (2014/05/12, OS 10.2+)', description: 'Приложение переписано с нуля, поддерживаются отдельно загружаемые модули. Обновлены для России Правила дорожного движения, коды регионов.'},
+                        {version: '1.0.0.3 (2013/10/04, OS 10.1+)', description: 'Добавлены дорожные знаки.'},
+                        {version: '1.0.0.2 (2013/10/02, OS 10.1+)', description: 'Обновление интерфейса, добавлены экзаменационные карточки.'}
+                    ],
+                    url: 'http://appworld.blackberry.com/webstore/content/37460887'
+                });
+
+                slides.push({
+                    image: 'http://appworld.blackberry.com/webstore/servedimages/37934578.png/?t=12',
+                    text: 'Поезда, Электрички',
+                    description: 'Программа "Поезда, Электрички" для BlackBerry® 10 позволяет получать актуальное расписание движения транспорта разных стран мира.<br><br>\
+Функционал программы разделяется на:\
+<ol>\
+<li>Базовый, доступный всегда и бесплатно: работа с провайдерами данных iRail.be (Бельгия), Аэроэкспресс (Россия (Владивосток, Казань, Москва)), Метро (Белоруссия (Минск), Россия (Москва, Санкт-Петербург), Украина(Киев, Харьков)), Российские Железные Дороги (Россия), Яндекс.Электрички (Армения, Белоруссия, Казахстан, Литва, Молдавия, Россия, Украина) (расписание, станции в пути маршрута, стоимости проезда, показывание местоположения станций в приложении Карты, если функционал доступен для провайдера); сохранение маршрута в избранное; добавление поезда в календарь для провайдеров Российские Железные Дороги, Яндекс.Электрички; напоминания о добавленных билетах.</li>\
+<li>Премиум, доступный после покупки внутри приложения: доступ ко всем настройкам приложения; включённое по-умолчанию кеширование для провайдеров iRail.be, Российские Железные Дороги, Яндекс.Электрички; включённый по-умолчанию поиск нескольких оптимальных маршрутов для провайдера Метро. Список доступных настроек приведён ниже.</li>\
+</ol>\
+<h3><strong>Интерфейс</strong>:</h3>\
+<ol>\
+<li><em>Тема</em> - тема интерфейса приложения.<br>\
+Доступные варианты: Светлая, Тёмная.<br>\
+Значение по-умолчанию: Системная.</li>\
+<li><em>Язык приложения</em> - язык интерфейса приложения.<br>\
+Доступные варианты: Системный, Английский, Немецкий, Русский.<br>\
+Значение по-умолчанию: Системный.</li>\
+<li><em>Показывать иконку провайдера данных</em> - надо ли показывать в заголовке иконку текущего провайдера.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+</ol>\
+<h3><strong>Провайдеры данных</strong>:</h3>\
+<ol>\
+<li><em>Восстановление состояния провайдера</em> - надо ли восстанавливать предыдущее состояние провайдера данных при его активации.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Сохранение состояния провайдера</em> - надо ли сохранять предыдущее состояние провайдера данных при активации другого провайдера и / или закрытии приложения.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+</ol>\
+<h3><strong><em>Аэроэкспресс</em></strong></h3>\
+<ol>\
+<li><em>Показывать время до ближайшего поезда</em> - надо ли показывать на странице вариантов поездов время до отправления ближайшего поезда.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Выделение ближайшего поезда</em> - надо ли показывать на странице вариантов поездов ближайшей поезд и подсвечивать его.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Прокручивать до ближайшего поезда</em> - надо ли на странице вариантов поездов постоянно прокручивать список поездов до ближайшего поезда.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Нет.</li>\
+<li><em>Временной сдвиг</em> - какой сдвиг по времени надо учитывать при вычислении ближайшего поезда.<br>\
+Доступные варианты: 00:00:00 - 12:00:00.<br>\
+Значение по-умолчанию: 00:00:00.</li>\
+</ol>\
+<h3><strong><em>iRail.be</em></strong></h3>\
+<ol>\
+<li><em>Язык провайдера</em> - язык используемый при запросах к провайдеру.<br>\
+Доступные варианты: Системный, Английский, Нидерландский, Немецкий, Французский.<br>\
+Значение по-умолчанию: Системный (Английский).</li>\
+<li><em>Автообновление</em> - надо ли автоматически обновлять данные на странице вариантов поездов при смене направления и / или даты.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Показывать длительность</em> - надо ли показывать на странице вариантов поездов длительность в пути маршрутов.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Показывать число пересадок</em> - надо ли показывать на странице вариантов поездов число пересадок в вариантах маршрутов.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Показывать время до ближайшего поезда</em> - надо ли показывать на странице вариантов поездов время до отправления ближайшего поезда.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Выделение ближайшего поезда</em> - надо ли показывать на странице вариантов поездов ближайшей поезд и подсвечивать его.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Прокручивать до ближайшего поезда</em> - надо ли на странице вариантов поездов постоянно прокручивать список поездов до ближайшего поезда.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Нет.</li>\
+<li><em>Временной сдвиг</em> - какой сдвиг по времени надо учитывать при вычислении ближайшего поезда.<br>\
+Доступные варианты: 00:00:00 - 12:00:00.<br>\
+Значение по-умолчанию: 00:00:00.</li>\
+<li><em>Кеширование</em> - надо ли кешировать данные, полученные от провайдера.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Нет (Да - для премиум).</li>\
+<li><em>Хранить в днях</em> - сколько дней надо кешировать данные, полученные от провайдера.<br>\
+Доступные варианты: Неограниченно, 5, 10, 15, 20, 25, 30.<br>\
+Значение по-умолчанию: 5.</li>\
+</ol>\
+<h3><strong><em>Метро</em></strong></h3>\
+<ol>\
+<li><em>Несколько маршрутов</em> - надо ли искать несколько вариантов пути.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Нет (Да - для премиум).</li>\
+<li><em>Показывать длительность</em> - надо ли показывать на странице вариантов поездов длительность в пути маршрутов.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+</ol>\
+<h3><strong><em>РЖД</em></strong></h3>\
+<ol>\
+<li><em>Язык провайдера</em> - язык используемый при запросах к провайдеру.<br>\
+Доступные варианты: Системный, Английский, Русский.<br>\
+Значение по-умолчанию: Системный (Английский).</li>\
+<li><em>Автообновление</em> - надо ли автоматически обновлять данные на странице вариантов поездов при смене направления и / или даты.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Только с билетами</em> - надо ли показывать на странице вариантов поездов только варианты с билетами в наличии.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Нет.</li>\
+<li><em>Показывать длительность</em> - надо ли показывать на странице вариантов поездов длительность в пути маршрутов.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Показывать стоимость</em> - надо ли показывать на странице вариантов поездов есть ли билеты в наличии.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Показывать время до ближайшего поезда</em> - надо ли показывать на странице вариантов поездов время до отправления ближайшего поезда.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Выделение ближайшего поезда</em> - надо ли показывать на странице вариантов поездов ближайшей поезд и подсвечивать его.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Прокручивать до ближайшего поезда</em> - надо ли на странице вариантов поездов постоянно прокручивать список поездов до ближайшего поезда.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Нет.</li>\
+<li><em>Временной сдвиг</em> - какой сдвиг по времени надо учитывать при вычислении ближайшего поезда.<br>\
+Доступные варианты: 00:00:00 - 12:00:00.<br>\
+Значение по-умолчанию: 00:00:00.</li>\
+<li><em>Кеширование</em> - надо ли кешировать данные, полученные от провайдера.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Нет (Да - для премиум).</li>\
+<li><em>Хранить в днях</em> - сколько дней надо кешировать данные, полученные от провайдера.<br>\
+Доступные варианты: Неограниченно, 5, 10, 15, 20, 25, 30.<br>\
+Значение по-умолчанию: 5.</li>\
+</ol>\
+<h3><strong><em>Яндекс.Электрички</em></strong></h3>\
+<ol>\
+<li><em>Автообновление</em> - надо ли автоматически обновлять данные на странице вариантов поездов при смене направления и / или даты.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Показывать длительность</em> - надо ли показывать на странице вариантов поездов длительность в пути маршрутов.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Показывать стоимость</em> - надо ли показывать на странице вариантов поездов стоимость билета.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Показывать время до ближайшего поезда</em> - надо ли показывать на странице вариантов поездов время до отправления ближайшего поезда.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Выделение ближайшего поезда</em> - надо ли показывать на странице вариантов поездов ближайшей поезд и подсвечивать его.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+<li><em>Прокручивать до ближайшего поезда</em> - надо ли на странице вариантов поездов постоянно прокручивать список поездов до ближайшего поезда.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Нет.</li>\
+<li><em>Тип выбора даты</em> - какой тип элемента интерфейса использовать для выбора даты.<br>\
+Доступные варианты: Сегменты, Календарь.<br>\
+Значение по-умолчанию: Сегменты.</li>\
+<li><em>Временной сдвиг</em> - какой сдвиг по времени надо учитывать при вычислении ближайшего поезда.<br>\
+Доступные варианты: 00:00:00 - 12:00:00.<br>\
+Значение по-умолчанию: 00:00:00.</li>\
+<li><em>Кеширование</em> - надо ли кешировать данные, полученные от провайдера.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Нет (Да - для премиум).</li>\
+<li><em>Хранить в днях</em> - сколько дней надо кешировать данные, полученные от провайдера.<br>\
+Доступные варианты: Неограниченно, 5, 10, 15, 20, 25, 30.<br>\
+Значение по-умолчанию: 5.</li>\
+</ol>\
+<h3><strong>Билеты</strong>:</h3>\
+<ol>\
+<li><em>Проверять даты билетов</em> - надо ли проверять дату окончания и показывать сообщение, если остается меньше суток.<br>\
+Доступные варианты: Да, Нет.<br>\
+Значение по-умолчанию: Да.</li>\
+</ol>',
+                    releases: [
+                        {version: '1.0.4.9 (2015/02/16, OS 10.3.1+)', description: 'Добавлен новый провайдер данных - Российские Железные Дороги. Добавлен однодневный демонстрационный режим работы без ограничений.'},
+                        {version: '1.0.4.8 (2014/12/30, OS 10.3.1+)', description: 'Исправлено отображение времени до следующего поезда в режиме "Все дни" для Яндекс.Электричек.'},
+                        {version: '1.0.4.7 (2014/12/22, OS 10.3.1+)', description: 'Обновлены таблицы расписания Москвы для Аэроэкспресса. Обновление интерфейса.'},
+                        {version: '1.0.4.6 (2014/12/08, OS 10.3.1+)', description: 'Обновление интерфейса.\nДобавлено сохранение маршрута в Календаре для провайдеров данных Аэроэкспресс и Яндекс.Электрички.'},
+                        {version: '1.0.4.5 (2014/12/01, OS 10.3.1+)', description: 'Обновление интерфейса.\nДобавлен премиум функционал для всех провайдеров: включение/отключение постоянной промотки до ближайшего поезда на странице маршрутов.\nДобавлен премиум функционал для провайдера данных Метро: включение/отключение поиска нескольких маршрутов.\nДобавлен премиум функционал для провайдера данных iRail.be: установка языка провайдера, показывание/скрытие числа пересадок на странице маршрутов.'},
+                        {version: '1.0.4.4 (2014/11/17, OS 10.3.1+)', description: 'Обновление интерфейса, правка найденых ошибок.'},
+                        {version: '1.0.4.3 (2014/11/17, OS 10.3.1+)', description: 'Добавлен новый провайдер данных для Бельгии (iRail.be), правка найденых ошибок.'},
+                        {version: '1.0.4.2 (2014/11/12, OS 10.3.1+)', description: 'Исправление ошибок (поддержка английской и русской локали для Аэроэкспресс и Метро провайдеров, выбор темы приложения, поиск маршрута для Санкт-Петербурга в Яндекс.Электрички провайдере), добавлена опция для скрытия иконки провайдера данных в заголовках окна.'},
+                        {version: '1.0.4.1 (2014/11/10, OS 10.3.1+)', description: 'Переписанный с нуля интерфейс. Добавлены новые провайдеры данных. Добавлено деление функционала на базовый и премиум, чтобы поддержать разработку.'},
+                        {version: '1.0.1.0 (2014/05/16, OS 10.2+)', description: 'Обновление интерфейса.'},
+                        {version: '1.0.0.9 (2014/05/12, OS 10.2+)', description: 'Добавлена транслитерация по "ГОСТ Р 52535.1-2006".'},
+                        {version: '1.0.0.8 (2013/11/21, OS 10.2+)', description: 'Обновление интерфейса, улучшение выбора даты, исправления в работе кеширования.'},
+                        {version: '1.0.0.7 (2013/11/18, OS 10.2+)', description: 'Обновление интерфейса, интегрирована аналитика от Flurry.'},
+                        {version: '1.0.0.6 (2013/11/12, OS 10.2+)', description: 'Обновление интерфейса, правка найденых ошибок, добавлена поддержка сдвига времени, улучшение списка избранных маршрутов.'},
+                        {version: '1.0.0.5 (2013/11/11, OS 10.2+)', description: 'Обновление интерфейса, правка найденых ошибок.'},
+                        {version: '1.0.0.3 (2013/11/04, OS 10.2+)', description: 'Обновление интерфейса, подсветка ближайшего поезда, правка найденых ошибок.'},
+                        {version: '1.0.0.2 (2013/11/01, OS 10.2+)', description: 'Обновление интерфейса, поправлено кеширование.'}
+                    ],
+                    url: 'http://appworld.blackberry.com/webstore/content/39880926'
+                });
+
+                $scope.$watch('slides[0].active', function() {
+                    if (slides[0].active) {
+                        $scope.selectedSlide = slides[0];
+                    }
+                });
+
+                $scope.$watch('slides[1].active', function() {
+                    if (slides[1].active) {
+                        $scope.selectedSlide = slides[1];
+                    }
+                });
+
+                $scope.$watch('slides[2].active', function() {
+                    if (slides[2].active) {
+                        $scope.selectedSlide = slides[2];
+                    }
+                });
+
+                $scope.$watch('slides[3].active', function() {
+                    if (slides[3].active) {
+                        $scope.selectedSlide = slides[3];
+                    }
+                });
+
+                if (undefined != location.hash && '' != location.hash) {
+                    var index = parseInt(location.hash.substring(1), 10);
+
+                    if (0 < index && slides.length > index) {
+                        slides[index].active = true;
+                        $scope.selectedSlide = slides[index];
+                    }
+                }
+            });
+        </script>
+
+        <div style="text-align: center;">Все приложения согласуются с опубликованной <a href="privacy-policy-ru.html">Политикой Kонфиденциальности</a></div><br>
+        <div ng-app="ui.bootstrap.blackberry.apps">
+            <div ng-controller="CarouselCtrl">
+                <div>
+                    <carousel interval="myInterval">
+                        <slide ng-repeat="slide in slides" active="slide.active">
+                            <a href="{{slide.url}}"><img ng-src="{{slide.image}}" style="margin:auto;"><div class="carousel-caption"><p>{{slide.text}}</p></div></a>
+                        </slide>
+                    </carousel>
+                </div>
+
+                <tabset justified="true">
+                    <tab heading="Описание"><p ng-bind-html="selectedSlide.description"></p></tab>
+                    <tab heading="Релизы">
+                        <accordion close-others="oneAtATime">
+                            <accordion-group heading="{{release.version}}" ng-repeat="release in selectedSlide.releases">
+                                {{release.description}}
+                            </accordion-group>
+                        </accordion>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    
+  </article>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://xnike.me/blog/2014/12/06/momentics-ide-installing-on-a-headless-linux-system/">Momentics IDE: Installing on a headless Linux system.</a>
+      </li>
+      <li class="post">
+          <a href="http://xnike.me/blog/2014/09/07/blackberry-10-creating-unit-tests-for-js/">BlackBerry 10: Creating unit tests for JS.</a>
+      </li>
+      <li class="post">
+          <a href="http://xnike.me/blog/2013/11/18/xpcom-error-0x80004005/">XPCOM error 0x80004005</a>
+      </li>
+      <li class="post">
+          <a href="http://xnike.me/blog/2013/08/13/blackberry-10-changing-application-theme-in-runtime/">Blackberry 10: Changing application theme in runtime</a>
+      </li>
+      <li class="post">
+          <a href="http://xnike.me/blog/2013/06/02/java-inlining-primitive-types-and-strings/">Java: inlining primitive types and Strings</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://xnike.me/category/misc.html">misc</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+    <a href="http://xnike.me/tag/x86_64.html">X86_64</a>,    <a href="http://xnike.me/tag/bb10.html">BB10</a>,    <a href="http://xnike.me/tag/marmalade.html">Marmalade</a>,    <a href="http://xnike.me/tag/qml.html">QML</a>,    <a href="http://xnike.me/tag/linux.html">Linux</a>,    <a href="http://xnike.me/tag/cascades.html">Cascades</a>,    <a href="http://xnike.me/tag/native.html">Native</a>,    <a href="http://xnike.me/tag/java.html">java</a>,    <a href="http://xnike.me/tag/fedora.html">FEDORA</a>,    <a href="http://xnike.me/tag/poco.html">POCO</a>,    <a href="http://xnike.me/tag/theme.html">Theme</a>,    <a href="http://xnike.me/tag/qunit.html">QUnit</a>,    <a href="http://xnike.me/tag/qnx.html">QNX</a>,    <a href="http://xnike.me/tag/js.html">JS</a>,    <a href="http://xnike.me/tag/windows-8.html">Windows 8</a>,    <a href="http://xnike.me/tag/grunt.html">Grunt</a>,    <a href="http://xnike.me/tag/c.html">C++</a>,    <a href="http://xnike.me/tag/qt.html">Qt</a>,    <a href="http://xnike.me/tag/bbndk.html">BBNDK</a>,    <a href="http://xnike.me/tag/blackberry.html">Blackberry</a>,    <a href="http://xnike.me/tag/momentics-ide.html">Momentics IDE</a>,    <a href="http://xnike.me/tag/blackberry-10.html">Blackberry 10</a>,    <a href="http://xnike.me/tag/playbook.html">Playbook</a>  </section>
+
+
+
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+    Copyright &copy;  2012&ndash;2014  Nikolay Khramchenkov &mdash;
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+  <script src="http://xnike.me/theme/js/modernizr-2.0.js"></script>
+  <script src="http://xnike.me/theme/js/ender.js"></script>
+  <script src="http://xnike.me/theme/js/octopress.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34844836-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-34844836-1');
+    ga('send', 'pageview');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'xnikeme';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = "//" + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>
