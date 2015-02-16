@@ -180,6 +180,8 @@ Features of the application are divided into two parts:\
 <li>Free: usage of data providers iRail.be (Belgium), Aeroexpress (Russia (Vladivostok, Kazan, Moscow)), Metro (Belarus (Minsk), Russia (Moscow, Saint-Petersburg), Ukraine(Kiev, Kharkov)), Russian Railways (Russia), Yandex.Trains (Armenia, Belarus, Kazakhstan, Lithuania, Moldova, Russia, Ukraine) (timetables, stops in the route, tickets cost, showing stops location in the Maps, if data provider supports this); storing routes in favorites; adding entries into the Calendar application for Russian Railways, Yandex.Trains; tickets expiration notifications.</li>\
 <li>Premium, available after in-app purchase: access to all setting of the application; enabled by default caching for iRail.be, Russian Railways, Yandex.Trains providers; enabled by default searching of several routes for Metro provider. List of all available settings are provided below.</li>\
 </ol>\
+One day demo mode will be activated on first start of application after installation. All application settings will be available as if premium features has been bought via in-app purchase. Once demo period ends all settings will be reverted to defaults for non-premium users.\
+<br><br>\
 <h3><strong>UI</strong>:</h3>\
 <ol>\
 <li><em>Theme</em> - theme of the application UI.<br>\
@@ -334,11 +336,12 @@ Available options: Yes, No.<br>\
 Default value: Yes.</li>\
 </ol>',
                     releases: [
+                        {version: '1.0.4.10 (2015/02/17, OS 10.3.1+)', description: 'Updated UI:<br>1. "Add To Calendar" action available for iRail.be, RussianRailways, Yandex.Trains providers on routes page and action bar of routes details page.<br>2. Updated items in lists on routes page for all data providers.<br>Updated translations.<br>Fixed Yandex.Trains issues with getting list of regions.'},
                         {version: '1.0.4.9 (2015/02/16, OS 10.3.1+)', description: 'Added new data provider Russian Railways. Added 1 day demo mode.'},
                         {version: '1.0.4.8 (2014/12/30, OS 10.3.1+)', description: 'Fixed showing time to next train for "All days" mode of Yandex.Trains.'},
                         {version: '1.0.4.7 (2014/12/22, OS 10.3.1+)', description: 'Fixed Aeroexpress.Moscow routes tables. Updated UI.'},
-                        {version: '1.0.4.6 (2014/12/08, OS 10.3.1+)', description: 'Updated UI.\nAdded saving a route in the Calendar application for Aeroexpress and Yandex.Trains data providers.'},
-                        {version: '1.0.4.5 (2014/12/01, OS 10.3.1+)', description: 'Polished Application UI.\nAdded PREMIUM features for all data providers: enable/disable constantly scrolling to the next train on the routes page. Added PREMIUM feature for Metro data provider: enable/disable several routes searching.\nAdded PREMIUM features for iRail.be data provider: language selection, show/hide number of transfers on routes page.'},
+                        {version: '1.0.4.6 (2014/12/08, OS 10.3.1+)', description: 'Updated UI.<br>Added saving a route in the Calendar application for Aeroexpress and Yandex.Trains data providers.'},
+                        {version: '1.0.4.5 (2014/12/01, OS 10.3.1+)', description: 'Polished Application UI.<br>Added PREMIUM features for all data providers: enable/disable constantly scrolling to the next train on the routes page. Added PREMIUM feature for Metro data provider: enable/disable several routes searching.<br>Added PREMIUM features for iRail.be data provider: language selection, show/hide number of transfers on routes page.'},
                         {version: '1.0.4.4 (2014/11/17, OS 10.3.1+)', description: 'Added new Belgium trains data provider (irail.be) and new features with settings; updated GUI.'},
                         {version: '1.0.4.3 (2014/11/17, OS 10.3.1+)', description: 'Added Belgium trains data provider (irail.be), small improvements.'},
                         {version: '1.0.4.2 (2014/11/12, OS 10.3.1+)', description: 'Bug fixing (locale for aeroexpress & metro, theme selection, routes for SaintP), added option to hide data provider icon on the Search and Routes pages.'},
@@ -405,9 +408,7 @@ Default value: Yes.</li>\
                     <tab heading="Description"><p ng-bind-html="selectedSlide.description"></p></tab>
                     <tab heading="Releases">
                         <accordion close-others="oneAtATime">
-                            <accordion-group heading="{{release.version}}" ng-repeat="release in selectedSlide.releases">
-                                {{release.description}}
-                            </accordion-group>
+                            <accordion-group heading="{{release.version}}" ng-repeat="release in selectedSlide.releases"><p ng-bind-html="release.description"></p></accordion-group>
                         </accordion>
                     </tab>
                 </tabset>
