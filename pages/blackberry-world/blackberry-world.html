@@ -4,7 +4,7 @@
         <meta name="authors" content="Nikolay Khramchenkov"/>
         <meta name="date" content="2014-12-07 23:59"/>
         <meta name="lang" content="en"/>
-        <meta name="modified" content="2015-02-23 23:59"/>
+        <meta name="modified" content="2015-03-08 23:59"/>
         <meta name="tags" content="thats, awesome"/>
     </head>
     <body>
@@ -113,7 +113,7 @@
                     description: '"Trains" application for BlackBerry® 10 allows you to get actual timetables for different countries.<br><br>\
 Features of the application are divided into two parts:\
 <ol>\
-<li>Free: usage of data providers iRail.be (Belgium), Aeroexpress (Russia (Vladivostok, Kazan, Moscow)), Metro (Belarus (Minsk), Russia (Moscow, Saint-Petersburg), Ukraine(Kiev, Kharkov)), Russian Railways (Russia), Yandex.Trains (Armenia, Belarus, Kazakhstan, Lithuania, Moldova, Russia, Ukraine) (timetables, stops in the route, tickets cost, showing stops location in the Maps, if data provider supports this); storing routes in favorites; adding entries into the Calendar application for Russian Railways, Yandex.Trains; tickets expiration notifications.</li>\
+<li>Free: usage of data providers iRail.be (Belgium), Aeroexpress (Russia (Vladivostok, Kazan, Moscow)), Metro (Belarus (Minsk), Russia (Moscow, Saint-Petersburg), Ukraine(Kiev, Kharkov)), Russian Railways (Russia), Yandex.Trains (Armenia, Belarus, Kazakhstan, Lithuania, Moldova, Russia, Ukraine) (timetables, stops in the route, tickets cost, showing stops location in the Maps, if data provider supports this); storing routes in favorites; adding entries into the Calendar application for Russian Railways, Yandex.Trains; tickets expiration notifications. Showing distance to destination for Aeroexpress and Yandex.Trains data providers.</li>\
 <li>Premium, available after in-app purchase: access to all setting of the application; enabled by default caching for iRail.be, Russian Railways, Yandex.Trains providers; enabled by default searching of several routes for Metro provider. List of all available settings are provided below.</li>\
 </ol>\
 On the Settings page one day demo mode could be activated only once. All application settings will be available as if premium features has been bought via in-app purchase. Once demo period ends all settings will be reverted to defaults for non-premium users.\
@@ -153,6 +153,15 @@ Default value: No.</li>\
 <li><em>Time shift</em> - time to add when computing the next train on the routes page.<br>\
 Available options: 00:00:00 - 12:00:00.<br>\
 Default value: 00:00:00.</li>\
+<li><em>Use GPS</em> - use GPS to show distance to destination on route details page.<br>\
+Available options: Yes, No.<br>\
+Default value: Yes.</li>\
+<li><em>Play Sound</em> - play sound on arriving to destination.<br>\
+Available options: Yes, No.<br>\
+Default value: Yes.</li>\
+<li><em>Distance</em> - distance to destination in meters to play sound.<br>\
+Available options: 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000.<br>\
+Default value: 500.</li>\
 </ol>\
 <h3><strong><em>iRail.be</em></strong></h3>\
 <ol>\
@@ -264,6 +273,15 @@ Default value: No (Yes - for premium).</li>\
 <li><em>Keep days</em> - days to keep each cache file.<br>\
 Available options: Unlimited, 5, 10, 15, 20, 25, 30.<br>\
 Default value: 5.</li>\
+<li><em>Use GPS</em> - use GPS to show distance to destination on route details page.<br>\
+Available options: Yes, No.<br>\
+Default value: Yes.</li>\
+<li><em>Play Sound</em> - play sound on arriving to destination.<br>\
+Available options: Yes, No.<br>\
+Default value: Yes.</li>\
+<li><em>Distance</em> - distance to destination in meters to play sound.<br>\
+Available options: 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000.<br>\
+Default value: 500.</li>\
 </ol>\
 <h3><strong>Tickets</strong>:</h3>\
 <ol>\
@@ -272,6 +290,8 @@ Available options: Yes, No.<br>\
 Default value: Yes.</li>\
 </ol>',
                     releases: [
+                        {version: '1.0.4.13 (2015/03/09, OS 10.3.1+)', description: 'Updated UI.<br>Updated Metro map of Moscow.<br><br>Added usage of GPS to show distance to destination for Aeroexpress and Yandex.Trains data providers.<br>To use this application feature following settings must be anabled:<br>1) System settings -&gt; Location Services -&gt; Location Services.<br>2) Permission for Trains to use Location.<br>3) Settings -&gt; Data Providers -&gt; Provider -&gt; Use GPS.'},
+                        {version: '1.0.4.12 (2015/02/26, OS 10.3.1+)', description: 'Updated UI of Yandex.Trains route on the route details page.<br>Updated Metro map of Moscow.<br>Added showing Metro routes on maps on the route details page.'},
                         {version: '1.0.4.11 (2015/02/24, OS 10.3.1+)', description: 'Updated UI of Metro route on the route details page.<br>Added selection of Metro stations on Map and showing Metro maps on the route details page.'},
                         {version: '1.0.4.10 (2015/02/17, OS 10.3.1+)', description: 'Updated UI:<br>1. "Add To Calendar" action available for iRail.be, RussianRailways, Yandex.Trains providers on routes page and action bar of routes details page.<br>2. Updated items in lists on routes page for all data providers.<br>Updated translations.<br>Fixed Yandex.Trains issues with getting list of regions.'},
                         {version: '1.0.4.9 (2015/02/16, OS 10.3.1+)', description: 'Added new data provider Russian Railways. Added 1 day demo mode.'},
@@ -298,24 +318,28 @@ Default value: Yes.</li>\
                 $scope.$watch('slides[0].active', function() {
                     if (slides[0].active) {
                         $scope.selectedSlide = slides[0];
+                        location.hash = '#0';
                     }
                 });
 
                 $scope.$watch('slides[1].active', function() {
                     if (slides[1].active) {
                         $scope.selectedSlide = slides[1];
+                        location.hash = '#1';
                     }
                 });
 
                 $scope.$watch('slides[2].active', function() {
                     if (slides[2].active) {
                         $scope.selectedSlide = slides[2];
+                        location.hash = '#2';
                     }
                 });
 
                 $scope.$watch('slides[3].active', function() {
                     if (slides[3].active) {
                         $scope.selectedSlide = slides[3];
+                        location.hash = '#3';
                     }
                 });
 
