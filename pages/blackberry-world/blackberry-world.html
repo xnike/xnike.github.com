@@ -121,14 +121,21 @@ On the Settings page one day demo mode could be activated only once. All applica
 <h3><strong>UI</strong>:</h3>\
 <ol>\
 <li><em>Theme</em> - theme of the application UI.<br>\
-Available options: Light, Dark.<br>\
+Available options: System, Ambient, Light, Dark.<br>\
 Default value: System.</li>\
+<li><em>Light Level</em> - minimum light level to use bright theme.<br>\
+Available options: Dark, Twilight, Light, Bright, Sunny.<br>\
+Default value: Bright.<br>\
+Usage condition: Ambient theme.</li>\
 <li><em>Application language</em> - language of the application UI.<br>\
 Available options: System, English, German, Russian.<br>\
 Default value: System.</li>\
 <li><em>Show data provider icon</em> - show selected provider icon on the TitleBar.<br>\
 Available options: Yes, No.<br>\
 Default value: Yes.</li>\
+<li><em>Prevent screen locking</em>.<br>\
+Available options: Yes, No.<br>\
+Default value: No.</li>\
 </ol>\
 <h3><strong>Data Providers</strong>:</h3>\
 <ol>\
@@ -283,6 +290,12 @@ Default value: Yes.</li>\
 Available options: 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000.<br>\
 Default value: 500.</li>\
 </ol>\
+<h3><strong>Recent</strong>:</h3>\
+<ol>\
+<li><em>Keep recent</em> - keep history of searching.<br>\
+Available options: Yes, No.<br>\
+Default value: Yes.</li>\
+</ol>\
 <h3><strong>Tickets</strong>:</h3>\
 <ol>\
 <li><em>Check tickets for expiration</em> - show ticket expiration notifications (less that one day to expire).<br>\
@@ -290,6 +303,7 @@ Available options: Yes, No.<br>\
 Default value: Yes.</li>\
 </ol>',
                     releases: [
+                        {version: '1.0.4.14 (2015/03/25, OS 10.3.1+)', description: 'Updated UI:<br>1. Changing application theme in runtime.<br>2. Added ambient theme with configurable light level threshold for switching to bright theme.<br>3. Added indicator of odd/even rows in the lists on Routes (for all data providers), Favorites and Tickets pages.<br>4. Added showing selected train on Active Cover for all data providers.<br>5. Added showing tickets fares for Minsk, Moscow, Saint Petersburg metros on Route Details page.<br><br>Fixed found issues.'},
                         {version: '1.0.4.13 (2015/03/09, OS 10.3.1+)', description: 'Updated UI.<br>Updated Metro map of Moscow.<br><br>Added usage of GPS to show distance to destination for Aeroexpress and Yandex.Trains data providers.<br>To use this application feature following settings must be anabled:<br>1) System settings -&gt; Location Services -&gt; Location Services.<br>2) Permission for Trains to use Location.<br>3) Settings -&gt; Data Providers -&gt; Provider -&gt; Use GPS.'},
                         {version: '1.0.4.12 (2015/02/26, OS 10.3.1+)', description: 'Updated UI of Yandex.Trains route on the route details page.<br>Updated Metro map of Moscow.<br>Added showing Metro routes on maps on the route details page.'},
                         {version: '1.0.4.11 (2015/02/24, OS 10.3.1+)', description: 'Updated UI of Metro route on the route details page.<br>Added selection of Metro stations on Map and showing Metro maps on the route details page.'},
