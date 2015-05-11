@@ -4,7 +4,7 @@
         <meta name="authors" content="Nikolay Khramchenkov"/>
         <meta name="date" content="2014-12-07 23:59"/>
         <meta name="lang" content="en"/>
-        <meta name="modified" content="2015-04-26 23:59"/>
+        <meta name="modified" content="2015-05-11 23:59"/>
         <meta name="tags" content="thats, awesome"/>
     </head>
     <body>
@@ -113,7 +113,7 @@
                     description: '"Trains" application for BlackBerry® 10 allows you to get actual timetables for different countries.<br><br>\
 Features of the application are divided into two parts:\
 <ol>\
-<li>Free: usage of data providers iRail.be (Belgium), Aeroexpress (Russia (Vladivostok, Kazan, Moscow)), Metro (Belarus (Minsk), Russia (Moscow, Saint-Petersburg), Ukraine(Kiev, Kharkov)), Russian Railways (Russia), Yandex.Trains (Armenia, Belarus, Kazakhstan, Lithuania, Moldova, Russia, Ukraine) (timetables, stops in the route, tickets cost, showing stops location in the Maps, if data provider supports this); storing routes in favorites; tickets expiration notifications. Showing distance to destination for Aeroexpress and Yandex.Trains data providers.</li>\
+<li>Free: usage of data providers iRail.be (Belgium), Aeroexpress (Russia (Vladivostok, Kazan, Moscow)), Metro (Belarus (Minsk), Russia (Moscow, Saint-Petersburg), UAE (Dubai), Ukraine (Kiev, Kharkov)), Russian Railways (Russia), Yandex.Trains (Armenia, Belarus, Kazakhstan, Lithuania, Moldova, Russia, Ukraine) (timetables, stops in the route, tickets cost, showing stops location in the Maps, if data provider supports this); storing routes in favorites; tickets expiration notifications. Showing distance to destination for Aeroexpress and Yandex.Trains data providers.</li>\
 <li>Premium, available after in-app purchase: access to all setting of the application; enabled by default caching for iRail.be, Russian Railways, Yandex.Trains providers; enabled by default searching of several routes for Metro provider; adding entries into the Calendar application for Russian Railways, Yandex.Trains. List of all available settings are provided below.</li>\
 </ol>\
 On the Settings page one day demo mode could be activated only once. All application settings will be available as if premium features has been bought via in-app purchase. Once demo period ends all settings will be reverted to defaults for non-premium users.\
@@ -303,6 +303,7 @@ Available options: Yes, No.<br>\
 Default value: Yes.</li>\
 </ol>',
                     releases: [
+                        {version: '1.0.4.18 (2015/05/12, OS 10.3.1+)', description: 'Added Dubai metro support.<br>Added 1 second delay before autocompletion as fix for issue with typing adjacement buttons on qwerty devices in case of fast internet for Russian Railways provider.<br>Added showing distance to destination on Active Cover for Metro and Yandex.Trains providers.<br>As of now timetables for iRail, Russian Railways are recalculating to device time zone.<br>Added more application usage hints.<br>Removed obsoleted regions of Aeroexpress provider.<br>Updated UI.'},
                         {version: '1.0.4.17 (2015/04/27, OS 10.3.1+)', description: 'Added hints about features of the application on appropriate pages.<br>Added aggressive cache usage setting (disabled by default) for Yandex.Trains provider.<br>Added fast open of data provider settings by touching a provider icon on the Routes page.<br>As of now adding a record into Calendar with selected route is PREMIUM feature.<br>Added &apos;Set On Search&apos; context action on Favorites and Recent pages (this will work correctly with new records only).'},
                         {version: '1.0.4.16 (2015/03/31, OS 10.3.1+)', description: 'Fixed data for calculation of subway cars hints.<br>Updated subway cars hint colors: red for selected car and orange for not selected.'},
                         {version: '1.0.4.15 (2015/03/26, OS 10.3.1+)', description: 'Added Recent page shows history of searching (enabled by default).<br>Added setting to prevent screen from locking (disabled by default).<br>Added subway cars hints (for all supported maps) on route details page for Metro data provider (enabled by default).<br>Updated Saint Petersburg metro map.'},
