@@ -104,19 +104,19 @@
 </li>
 </ol>
 <p>Load the environment variables for the console session:</p>
-<div class="highlight"><pre><span class="n">source</span> <span class="s">&quot;SDK root&quot;</span><span class="o">/</span><span class="n">bbndk</span><span class="o">-</span><span class="n">env</span><span class="p">.</span><span class="n">sh</span>
+<div class="highlight"><pre>source &quot;SDK root&quot;/bbndk-env.sh
 </pre></div>
 
 
 <p>Configuring build:</p>
-<div class="highlight"><pre><span class="n">cd</span> <span class="s">&quot;Unpacked POCO root&quot;</span>
-<span class="p">.</span><span class="o">/</span><span class="n">configure</span> <span class="o">--</span><span class="n">config</span><span class="o">=</span><span class="s">&quot;Profile file name&quot;</span> <span class="o">--</span><span class="n">omit</span><span class="o">=</span><span class="n">NetSSL_OpenSSL</span><span class="p">,</span><span class="n">Crypto</span><span class="p">,</span><span class="n">Data</span><span class="o">/</span><span class="n">ODBC</span><span class="p">,</span><span class="n">Data</span><span class="o">/</span><span class="n">MySQL</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">tests</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">samples</span> <span class="o">--</span><span class="k">static</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=</span><span class="s">&quot;Profile result directory&quot;</span>
+<div class="highlight"><pre>cd &quot;Unpacked POCO root&quot;
+./configure --config=&quot;Profile file name&quot; --omit=NetSSL_OpenSSL,Crypto,Data/ODBC,Data/MySQL --no-tests --no-samples --static --prefix=&quot;Profile result directory&quot;
 </pre></div>
 
 
 <p>Compiling and installing result of the build in the "Profile result directory":</p>
-<div class="highlight"><pre><span class="n">make</span> <span class="o">-</span><span class="n">s</span>
-<span class="n">make</span> <span class="n">install</span>
+<div class="highlight"><pre>make -s
+make install
 </pre></div></div>
     <footer>
 <p class="meta">
@@ -144,6 +144,9 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://xnike.me/blog/2015/08/16/fixing-route-for-bb10-devices-on-linux-system/">Fixing route for BB10 devices on Linux system.</a>
+      </li>
+      <li class="post">
           <a href="http://xnike.me/blog/2014/12/06/momentics-ide-installing-on-a-headless-linux-system/">Momentics IDE: Installing on a headless Linux system.</a>
       </li>
       <li class="post">
@@ -154,9 +157,6 @@
       </li>
       <li class="post">
           <a href="http://xnike.me/blog/2013/08/13/blackberry-10-changing-application-theme-in-runtime/">Blackberry 10: Changing application theme in runtime</a>
-      </li>
-      <li class="post">
-          <a href="http://xnike.me/blog/2013/06/02/java-inlining-primitive-types-and-strings/">Java: inlining primitive types and Strings</a>
       </li>
     </ul>
   </section>
@@ -171,14 +171,14 @@
 
   <section>
   <h1>Tags</h1>
-    <a href="http://xnike.me/tag/x86_64.html">X86_64</a>,    <a href="http://xnike.me/tag/bb10.html">BB10</a>,    <a href="http://xnike.me/tag/marmalade.html">Marmalade</a>,    <a href="http://xnike.me/tag/qml.html">QML</a>,    <a href="http://xnike.me/tag/linux.html">Linux</a>,    <a href="http://xnike.me/tag/cascades.html">Cascades</a>,    <a href="http://xnike.me/tag/native.html">Native</a>,    <a href="http://xnike.me/tag/java.html">java</a>,    <a href="http://xnike.me/tag/fedora.html">FEDORA</a>,    <a href="http://xnike.me/tag/poco.html">POCO</a>,    <a href="http://xnike.me/tag/theme.html">Theme</a>,    <a href="http://xnike.me/tag/qunit.html">QUnit</a>,    <a href="http://xnike.me/tag/qnx.html">QNX</a>,    <a href="http://xnike.me/tag/js.html">JS</a>,    <a href="http://xnike.me/tag/windows-8.html">Windows 8</a>,    <a href="http://xnike.me/tag/grunt.html">Grunt</a>,    <a href="http://xnike.me/tag/c.html">C++</a>,    <a href="http://xnike.me/tag/qt.html">Qt</a>,    <a href="http://xnike.me/tag/bbndk.html">BBNDK</a>,    <a href="http://xnike.me/tag/blackberry.html">Blackberry</a>,    <a href="http://xnike.me/tag/momentics-ide.html">Momentics IDE</a>,    <a href="http://xnike.me/tag/blackberry-10.html">Blackberry 10</a>,    <a href="http://xnike.me/tag/playbook.html">Playbook</a>  </section>
+    <a href="http://xnike.me/tag/x86_64.html">X86_64</a>,    <a href="http://xnike.me/tag/bb10.html">BB10</a>,    <a href="http://xnike.me/tag/marmalade.html">Marmalade</a>,    <a href="http://xnike.me/tag/qml.html">QML</a>,    <a href="http://xnike.me/tag/linux.html">Linux</a>,    <a href="http://xnike.me/tag/cascades.html">Cascades</a>,    <a href="http://xnike.me/tag/native.html">Native</a>,    <a href="http://xnike.me/tag/java.html">java</a>,    <a href="http://xnike.me/tag/fedora.html">FEDORA</a>,    <a href="http://xnike.me/tag/poco.html">POCO</a>,    <a href="http://xnike.me/tag/theme.html">Theme</a>,    <a href="http://xnike.me/tag/qunit.html">QUnit</a>,    <a href="http://xnike.me/tag/qnx.html">QNX</a>,    <a href="http://xnike.me/tag/js.html">JS</a>,    <a href="http://xnike.me/tag/windows-8.html">Windows 8</a>,    <a href="http://xnike.me/tag/grunt.html">Grunt</a>,    <a href="http://xnike.me/tag/c.html">C++</a>,    <a href="http://xnike.me/tag/qt.html">Qt</a>,    <a href="http://xnike.me/tag/bbndk.html">BBNDK</a>,    <a href="http://xnike.me/tag/blackberry.html">Blackberry</a>,    <a href="http://xnike.me/tag/momentics-ide.html">Momentics IDE</a>,    <a href="http://xnike.me/tag/blackberry-10.html">BlackBerry 10</a>,    <a href="http://xnike.me/tag/playbook.html">PlayBook</a>  </section>
 
 
 
 </aside>    </div>
   </div>
   <footer role="contentinfo"><p>
-    Copyright &copy;  2012&ndash;2014  Nikolay Khramchenkov &mdash;
+    Copyright &copy;  2012&ndash;2015  Nikolay Khramchenkov &mdash;
   <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
 </p></footer>
   <script src="http://xnike.me/theme/js/modernizr-2.0.js"></script>

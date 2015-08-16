@@ -131,35 +131,35 @@ The application should update the installed application bar-descriptor.xml file 
 
 
 <p>So, if you export application instance as context property in the applicationui.cpp</p>
-<div class="highlight"><pre><span class="n">qml</span><span class="o">-&gt;</span><span class="n">setContextProperty</span><span class="p">(</span><span class="s">&quot;App&quot;</span><span class="p">,</span> <span class="n">this</span><span class="p">);</span>
+<div class="highlight"><pre>qml-&gt;setContextProperty(&quot;App&quot;, this);
 </pre></div>
 
 
 <p>you can invoke implemented method from the QML:</p>
-<div class="highlight"><pre><span class="p">....</span>
+<div class="highlight"><pre>....
 
-<span class="n">DropDown</span> <span class="p">{</span>
-    <span class="nl">id:</span> <span class="n">themeDropDown</span>
-    <span class="nl">title:</span> <span class="n">qsTr</span><span class="p">(</span><span class="s">&quot;Theme&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">Retranslate</span><span class="p">.</span><span class="n">onLocaleOrLanguageChanged</span>
+DropDown {
+    id: themeDropDown
+    title: qsTr(&quot;Theme&quot;) + Retranslate.onLocaleOrLanguageChanged
 
-    <span class="n">Option</span> <span class="p">{</span>
-        <span class="nl">text:</span> <span class="n">qsTr</span><span class="p">(</span><span class="s">&quot;Bright&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">Retranslate</span><span class="p">.</span><span class="n">onLocaleOrLanguageChanged</span>
-        <span class="nl">value:</span> <span class="n">VisualStyle</span><span class="p">.</span><span class="n">Bright</span>
-        <span class="nl">selected:</span> <span class="n">VisualStyle</span><span class="p">.</span><span class="n">Bright</span> <span class="o">==</span> <span class="n">Application</span><span class="p">.</span><span class="n">themeSupport</span><span class="p">.</span><span class="n">theme</span><span class="p">.</span><span class="n">colorTheme</span><span class="p">.</span><span class="n">style</span>
-    <span class="p">}</span>
+    Option {
+        text: qsTr(&quot;Bright&quot;) + Retranslate.onLocaleOrLanguageChanged
+        value: VisualStyle.Bright
+        selected: VisualStyle.Bright == Application.themeSupport.theme.colorTheme.style
+    }
 
-    <span class="n">Option</span> <span class="p">{</span>
-        <span class="nl">text:</span> <span class="n">qsTr</span><span class="p">(</span><span class="s">&quot;Dark&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">Retranslate</span><span class="p">.</span><span class="n">onLocaleOrLanguageChanged</span>
-        <span class="nl">value:</span> <span class="n">VisualStyle</span><span class="p">.</span><span class="n">Dark</span>
-        <span class="nl">selected:</span> <span class="n">VisualStyle</span><span class="p">.</span><span class="n">Dark</span> <span class="o">==</span> <span class="n">Application</span><span class="p">.</span><span class="n">themeSupport</span><span class="p">.</span><span class="n">theme</span><span class="p">.</span><span class="n">colorTheme</span><span class="p">.</span><span class="n">style</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    Option {
+        text: qsTr(&quot;Dark&quot;) + Retranslate.onLocaleOrLanguageChanged
+        value: VisualStyle.Dark
+        selected: VisualStyle.Dark == Application.themeSupport.theme.colorTheme.style
+    }
+}
 
-<span class="p">....</span>
+....
 
-<span class="nl">onSomething:</span> <span class="p">{</span>
-    <span class="n">App</span><span class="p">.</span><span class="n">changeTheme</span><span class="p">(</span><span class="n">themeDropDown</span><span class="p">.</span><span class="n">selectedValue</span><span class="p">);</span>
-<span class="p">}</span>
+onSomething: {
+    App.changeTheme(themeDropDown.selectedValue);
+}
 </pre></div>
 
 
@@ -190,6 +190,9 @@ The application should update the installed application bar-descriptor.xml file 
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://xnike.me/blog/2015/08/16/fixing-route-for-bb10-devices-on-linux-system/">Fixing route for BB10 devices on Linux system.</a>
+      </li>
+      <li class="post">
           <a href="http://xnike.me/blog/2014/12/06/momentics-ide-installing-on-a-headless-linux-system/">Momentics IDE: Installing on a headless Linux system.</a>
       </li>
       <li class="post">
@@ -200,9 +203,6 @@ The application should update the installed application bar-descriptor.xml file 
       </li>
       <li class="post">
           <a href="http://xnike.me/blog/2013/08/13/blackberry-10-changing-application-theme-in-runtime/">Blackberry 10: Changing application theme in runtime</a>
-      </li>
-      <li class="post">
-          <a href="http://xnike.me/blog/2013/06/02/java-inlining-primitive-types-and-strings/">Java: inlining primitive types and Strings</a>
       </li>
     </ul>
   </section>
@@ -217,14 +217,14 @@ The application should update the installed application bar-descriptor.xml file 
 
   <section>
   <h1>Tags</h1>
-    <a href="http://xnike.me/tag/x86_64.html">X86_64</a>,    <a href="http://xnike.me/tag/bb10.html">BB10</a>,    <a href="http://xnike.me/tag/marmalade.html">Marmalade</a>,    <a href="http://xnike.me/tag/qml.html">QML</a>,    <a href="http://xnike.me/tag/linux.html">Linux</a>,    <a href="http://xnike.me/tag/cascades.html">Cascades</a>,    <a href="http://xnike.me/tag/native.html">Native</a>,    <a href="http://xnike.me/tag/java.html">java</a>,    <a href="http://xnike.me/tag/fedora.html">FEDORA</a>,    <a href="http://xnike.me/tag/poco.html">POCO</a>,    <a href="http://xnike.me/tag/theme.html">Theme</a>,    <a href="http://xnike.me/tag/qunit.html">QUnit</a>,    <a href="http://xnike.me/tag/qnx.html">QNX</a>,    <a href="http://xnike.me/tag/js.html">JS</a>,    <a href="http://xnike.me/tag/windows-8.html">Windows 8</a>,    <a href="http://xnike.me/tag/grunt.html">Grunt</a>,    <a href="http://xnike.me/tag/c.html">C++</a>,    <a href="http://xnike.me/tag/qt.html">Qt</a>,    <a href="http://xnike.me/tag/bbndk.html">BBNDK</a>,    <a href="http://xnike.me/tag/blackberry.html">Blackberry</a>,    <a href="http://xnike.me/tag/momentics-ide.html">Momentics IDE</a>,    <a href="http://xnike.me/tag/blackberry-10.html">Blackberry 10</a>,    <a href="http://xnike.me/tag/playbook.html">Playbook</a>  </section>
+    <a href="http://xnike.me/tag/x86_64.html">X86_64</a>,    <a href="http://xnike.me/tag/bb10.html">BB10</a>,    <a href="http://xnike.me/tag/marmalade.html">Marmalade</a>,    <a href="http://xnike.me/tag/qml.html">QML</a>,    <a href="http://xnike.me/tag/linux.html">Linux</a>,    <a href="http://xnike.me/tag/cascades.html">Cascades</a>,    <a href="http://xnike.me/tag/native.html">Native</a>,    <a href="http://xnike.me/tag/java.html">java</a>,    <a href="http://xnike.me/tag/fedora.html">FEDORA</a>,    <a href="http://xnike.me/tag/poco.html">POCO</a>,    <a href="http://xnike.me/tag/theme.html">Theme</a>,    <a href="http://xnike.me/tag/qunit.html">QUnit</a>,    <a href="http://xnike.me/tag/qnx.html">QNX</a>,    <a href="http://xnike.me/tag/js.html">JS</a>,    <a href="http://xnike.me/tag/windows-8.html">Windows 8</a>,    <a href="http://xnike.me/tag/grunt.html">Grunt</a>,    <a href="http://xnike.me/tag/c.html">C++</a>,    <a href="http://xnike.me/tag/qt.html">Qt</a>,    <a href="http://xnike.me/tag/bbndk.html">BBNDK</a>,    <a href="http://xnike.me/tag/blackberry.html">Blackberry</a>,    <a href="http://xnike.me/tag/momentics-ide.html">Momentics IDE</a>,    <a href="http://xnike.me/tag/blackberry-10.html">BlackBerry 10</a>,    <a href="http://xnike.me/tag/playbook.html">PlayBook</a>  </section>
 
 
 
 </aside>    </div>
   </div>
   <footer role="contentinfo"><p>
-    Copyright &copy;  2012&ndash;2014  Nikolay Khramchenkov &mdash;
+    Copyright &copy;  2012&ndash;2015  Nikolay Khramchenkov &mdash;
   <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
 </p></footer>
   <script src="http://xnike.me/theme/js/modernizr-2.0.js"></script>

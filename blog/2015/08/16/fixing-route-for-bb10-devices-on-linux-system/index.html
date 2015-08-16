@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Tag: FEDORA &mdash; xnike's blog</title>
+  <title>Fixing route for BB10 devices on Linux system. &mdash; xnike's blog</title>
   <meta name="author" content="Nikolay Khramchenkov">
 
   <link href="http://xnike.me/feeds/all.atom.xml" type="application/rss+xml" rel="alternate"
@@ -60,35 +60,98 @@
   <div id="main">
     <div id="content">
 <div>
-	<article role="article">
-    	<header>
-    		<h1 class="entry-title">Tag: FEDORA</h1>
-    	</header>
+  <article class="hentry" role="article">
+<header>
+    
+    <div id="qr-code-blog/2015/08/16/fixing-route-for-bb10-devices-on-linux-system/" class="qr-code-image-block"></div>
+    <script src="http://xnike.me/theme/js/qr.min.js" type="text/javascript"></script>
+    <script>
+        var img = qr.image({
+            value: 'http://xnike.me/blog/2015/08/16/fixing-route-for-bb10-devices-on-linux-system/',
+            level: 'L',
+            size: 4
+        });
+        document.getElementById('qr-code-blog/2015/08/16/fixing-route-for-bb10-devices-on-linux-system/').appendChild(img);
+    </script>
+      <h1 class="entry-title">Fixing route for BB10 devices on Linux system.</h1>
+    <p class="meta">
+<time datetime="2015-08-16T11:00:00+03:00" pubdate>Sun 16 August 2015</time>    </p>
+</header>
 
-    	<div id="blog-archives">
-            <h2>2013</h2>
-                    <article>
-                        <h1><a href="http://xnike.me/blog/2013/11/18/xpcom-error-0x80004005/">XPCOM error 0x80004005</a></h1>
-                        <time datetime="2013-11-18 20:08:00+04:00" pubdate>
-                            <span class="month">Nov</span>
-                            <span class="day">18</span>
-                            <span class="year">2013</span>
-                        </time>
-                        <footer>
-                            <span class="categories">posted in
-                                <a class='category' href='http://xnike.me/category/misc.html'>misc</a>
-                            </span>
-                        </footer>
-                    </article>
-	    </div>
-    </article>
+  <div class="entry-content"><p>After updating my BlackBerry Q10 with name "Q10" to OS 10.3.1 I started expecting connection issue via USB cable:</p>
+<div class="highlight"><pre>[root@localhost ~]# ping Q10.local
+PING Q10.local (169.254.141.173) 56(84) bytes of data.
+^C
+--- Q10.local ping statistics ---
+5 packets transmitted, 0 received, 100% packet loss, time 3999ms
+</pre></div>
+
+
+<p>Output of "route" command shows that device was recognized by system:</p>
+<div class="highlight"><pre>[root@localhost ~]# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         gateway         0.0.0.0         UG    600    0        0 wlp3s0
+Q10.local       linux.local     255.255.255.255 UGH   100    0        0 enp14s0u1
+...
+</pre></div>
+
+
+<p>As a fix you can repeat  the same command used by system to create item in the kernel ip routing table (you should the same Iface you see in the route output):</p>
+<div class="highlight"><pre>route add -net Q10.local netmask 255.255.255.255 gw linux.local dev enp14s0u1
+</pre></div>
+
+
+<p>And now everything is OK:</p>
+<div class="highlight"><pre>[root@localhost ~]# ping Q10.local
+PING Q10.local (169.254.141.173) 56(84) bytes of data.
+64 bytes from Q10.local (169.254.141.173): icmp_seq=1 ttl=255 time=2.16 ms
+64 bytes from Q10.local (169.254.141.173): icmp_seq=2 ttl=255 time=2.51 ms
+64 bytes from Q10.local (169.254.141.173): icmp_seq=3 ttl=255 time=2.29 ms
+^C
+--- Q10.local ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2001ms
+rtt min/avg/max/mdev = 2.164/2.324/2.512/0.153 ms
+</pre></div></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">
+        Nikolay Khramchenkov
+    </span>
+  </span>
+<time datetime="2015-08-16T11:00:00+03:00" pubdate>Sun 16 August 2015</time>  <span class="categories">
+    <a class='category' href='http://xnike.me/category/misc.html'>misc</a>
+  </span>
+  <span class="categories">
+    <a class="category" href="http://xnike.me/tag/bb10.html">BB10</a>,    <a class="category" href="http://xnike.me/tag/blackberry-10.html">BlackBerry 10</a>,    <a class="category" href="http://xnike.me/tag/linux.html">Linux</a>  </span>
+</p><div class="sharing">
+</div>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
 </div>
 <aside class="sidebar">
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://xnike.me/blog/2015/08/16/fixing-route-for-bb10-devices-on-linux-system/">Fixing route for BB10 devices on Linux system.</a>
+      </li>
+      <li class="post">
+          <a href="http://xnike.me/blog/2014/12/06/momentics-ide-installing-on-a-headless-linux-system/">Momentics IDE: Installing on a headless Linux system.</a>
+      </li>
+      <li class="post">
+          <a href="http://xnike.me/blog/2014/09/07/blackberry-10-creating-unit-tests-for-js/">BlackBerry 10: Creating unit tests for JS.</a>
+      </li>
+      <li class="post">
           <a href="http://xnike.me/blog/2013/11/18/xpcom-error-0x80004005/">XPCOM error 0x80004005</a>
+      </li>
+      <li class="post">
+          <a href="http://xnike.me/blog/2013/08/13/blackberry-10-changing-application-theme-in-runtime/">Blackberry 10: Changing application theme in runtime</a>
       </li>
     </ul>
   </section>
@@ -110,7 +173,7 @@
 </aside>    </div>
   </div>
   <footer role="contentinfo"><p>
-    Copyright &copy;  2013  Nikolay Khramchenkov &mdash;
+    Copyright &copy;  2012&ndash;2015  Nikolay Khramchenkov &mdash;
   <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
 </p></footer>
   <script src="http://xnike.me/theme/js/modernizr-2.0.js"></script>
@@ -136,6 +199,9 @@
 </script>
 	<script type="text/javascript">
 	  var disqus_shortname = 'xnikeme';
+          var disqus_identifier = '/blog/2015/08/16/fixing-route-for-bb10-devices-on-linux-system/';
+          var disqus_url = 'http://xnike.me/blog/2015/08/16/fixing-route-for-bb10-devices-on-linux-system/';
+          var disqus_title = 'Fixing route for BB10 devices on Linux system.';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 	    dsq.src = "//" + disqus_shortname + '.disqus.com/embed.js';

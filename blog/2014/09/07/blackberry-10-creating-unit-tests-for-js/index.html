@@ -82,24 +82,24 @@
 It is interesting to know what features and constraints Blackberry's solution will have.</p>
 <p>Meanwhile, we can easily make unit tests for our JavaScript source codes now by using grunt and qunit. If you are not familiar with grunt, please visit <a href="http://gruntjs.com/getting-started">Getting started</a> page on the official site.</p>
 <p>Assume we've created new Cascades project with the following structure:</p>
-<div class="highlight"><pre><span class="n">CascadesProject</span><span class="o">/</span>
-<span class="err">├──</span> <span class="n">assets</span><span class="o">/</span>
-<span class="err">│</span>   <span class="err">├──</span> <span class="n">main</span><span class="p">.</span><span class="n">qml</span>
-<span class="err">│</span>   <span class="err">├──</span> <span class="n">js</span><span class="o">/</span>
-<span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">Commons</span><span class="p">.</span><span class="n">js</span>
-<span class="err">├──</span> <span class="n">src</span><span class="o">/</span>
-<span class="err">│</span>   <span class="err">├──</span> <span class="n">applicationui</span><span class="p">.</span><span class="n">cpp</span>
-<span class="err">│</span>   <span class="err">├──</span> <span class="n">applicationui</span><span class="p">.</span><span class="n">hpp</span>
-<span class="err">│</span>   <span class="err">└──</span> <span class="n">main</span><span class="p">.</span><span class="n">cpp</span>
-<span class="err">├──</span> <span class="n">tests</span><span class="o">/</span>
-<span class="err">│</span>   <span class="err">├──</span> <span class="n">js</span><span class="o">/</span>
-<span class="err">│</span>   <span class="err">│</span>   <span class="err">├──</span> <span class="n">Common</span><span class="p">.</span><span class="n">js</span>
-<span class="err">│</span>   <span class="err">│</span>   <span class="err">└──</span> <span class="n">about</span><span class="p">.</span><span class="n">md</span>
-<span class="err">│</span>   <span class="err">├──</span> <span class="n">Gruntfile</span><span class="p">.</span><span class="n">js</span>
-<span class="err">│</span>   <span class="err">└──</span> <span class="n">package</span><span class="p">.</span><span class="n">json</span>
-<span class="err">├──</span> <span class="n">bar</span><span class="o">-</span><span class="n">descriptor</span><span class="p">.</span><span class="n">xml</span>
-<span class="err">├──</span> <span class="n">CascadesProject</span><span class="p">.</span><span class="n">pro</span>
-<span class="err">└──</span> <span class="n">icon</span><span class="p">.</span><span class="n">png</span>
+<div class="highlight"><pre>CascadesProject/
+├── assets/
+│   ├── main.qml
+│   ├── js/
+│   │   └── Commons.js
+├── src/
+│   ├── applicationui.cpp
+│   ├── applicationui.hpp
+│   └── main.cpp
+├── tests/
+│   ├── js/
+│   │   ├── Common.js
+│   │   └── about.md
+│   ├── Gruntfile.js
+│   └── package.json
+├── bar-descriptor.xml
+├── CascadesProject.pro
+└── icon.png
 </pre></div>
 
 
@@ -112,13 +112,13 @@ It is interesting to know what features and constraints Blackberry's solution wi
 
 
 <p>function we will use in assets/main.qml</p>
-<div class="highlight"><pre><span class="n">import</span> <span class="n">bb</span><span class="p">.</span><span class="n">cascades</span> <span class="mf">1.2</span>
-<span class="n">import</span> <span class="err">&#39;</span><span class="n">js</span><span class="o">/</span><span class="n">Common</span><span class="p">.</span><span class="n">js</span><span class="err">&#39;</span> <span class="n">as</span> <span class="n">Common</span>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">bb.cascades</span> <span class="mf">1.2</span>
+<span class="kn">import</span> <span class="s">&#39;js/Common.js&#39;</span> <span class="k">as</span> <span class="n">Common</span>
 
 <span class="n">Page</span> <span class="p">{</span>
     <span class="n">Container</span> <span class="p">{</span>
         <span class="n">Label</span> <span class="p">{</span>
-            <span class="nl">text:</span> <span class="n">Common</span><span class="p">.</span><span class="n">getSum</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+            <span class="n">text</span><span class="p">:</span> <span class="n">Common</span><span class="o">.</span><span class="n">getSum</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -146,8 +146,8 @@ npm WARN package.json cascadesproject-js-tests@0.0.1 No README data
 npm http GET https://registry.npmjs.org/grunt
 npm http GET https://registry.npmjs.org/grunt-contrib-qunit
 npm http GET https://registry.npmjs.org/qunitjs
-npm http 304 https://registry.npmjs.org/qunitjs
-npm http 200 https://registry.npmjs.org/grunt
+npm http <span class="m">304</span> https://registry.npmjs.org/qunitjs
+npm http <span class="m">200</span> https://registry.npmjs.org/grunt
 <span class="o">&lt;&lt;&lt;</span><span class="s">&lt;&lt; skipped &gt;&gt;&gt;&gt;&gt;</span>
 <span class="s">qunitjs</span>@1.15.0 node_modules/qunitjs
 
@@ -182,7 +182,7 @@ grunt-contrib-qunit@0.5.2 node_modules/grunt-contrib-qunit
 <div class="highlight"><pre><span class="o">[</span>xnike@localhost tests<span class="o">]</span><span class="nv">$ </span>grunt qunit
 Running <span class="s2">&quot;qunit:all&quot;</span> <span class="o">(</span>qunit<span class="o">)</span> task
 Testing js/Common.html ..OK
-&gt;&gt; 2 assertions passed <span class="o">(</span>17ms<span class="o">)</span>
+&gt;&gt; <span class="m">2</span> assertions passed <span class="o">(</span>17ms<span class="o">)</span>
 </pre></div>
 
 
@@ -213,6 +213,9 @@ Testing js/Common.html ..OK
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="http://xnike.me/blog/2015/08/16/fixing-route-for-bb10-devices-on-linux-system/">Fixing route for BB10 devices on Linux system.</a>
+      </li>
+      <li class="post">
           <a href="http://xnike.me/blog/2014/12/06/momentics-ide-installing-on-a-headless-linux-system/">Momentics IDE: Installing on a headless Linux system.</a>
       </li>
       <li class="post">
@@ -223,9 +226,6 @@ Testing js/Common.html ..OK
       </li>
       <li class="post">
           <a href="http://xnike.me/blog/2013/08/13/blackberry-10-changing-application-theme-in-runtime/">Blackberry 10: Changing application theme in runtime</a>
-      </li>
-      <li class="post">
-          <a href="http://xnike.me/blog/2013/06/02/java-inlining-primitive-types-and-strings/">Java: inlining primitive types and Strings</a>
       </li>
     </ul>
   </section>
@@ -240,14 +240,14 @@ Testing js/Common.html ..OK
 
   <section>
   <h1>Tags</h1>
-    <a href="http://xnike.me/tag/x86_64.html">X86_64</a>,    <a href="http://xnike.me/tag/bb10.html">BB10</a>,    <a href="http://xnike.me/tag/marmalade.html">Marmalade</a>,    <a href="http://xnike.me/tag/qml.html">QML</a>,    <a href="http://xnike.me/tag/linux.html">Linux</a>,    <a href="http://xnike.me/tag/cascades.html">Cascades</a>,    <a href="http://xnike.me/tag/native.html">Native</a>,    <a href="http://xnike.me/tag/java.html">java</a>,    <a href="http://xnike.me/tag/fedora.html">FEDORA</a>,    <a href="http://xnike.me/tag/poco.html">POCO</a>,    <a href="http://xnike.me/tag/theme.html">Theme</a>,    <a href="http://xnike.me/tag/qunit.html">QUnit</a>,    <a href="http://xnike.me/tag/qnx.html">QNX</a>,    <a href="http://xnike.me/tag/js.html">JS</a>,    <a href="http://xnike.me/tag/windows-8.html">Windows 8</a>,    <a href="http://xnike.me/tag/grunt.html">Grunt</a>,    <a href="http://xnike.me/tag/c.html">C++</a>,    <a href="http://xnike.me/tag/qt.html">Qt</a>,    <a href="http://xnike.me/tag/bbndk.html">BBNDK</a>,    <a href="http://xnike.me/tag/blackberry.html">Blackberry</a>,    <a href="http://xnike.me/tag/momentics-ide.html">Momentics IDE</a>,    <a href="http://xnike.me/tag/blackberry-10.html">Blackberry 10</a>,    <a href="http://xnike.me/tag/playbook.html">Playbook</a>  </section>
+    <a href="http://xnike.me/tag/x86_64.html">X86_64</a>,    <a href="http://xnike.me/tag/bb10.html">BB10</a>,    <a href="http://xnike.me/tag/marmalade.html">Marmalade</a>,    <a href="http://xnike.me/tag/qml.html">QML</a>,    <a href="http://xnike.me/tag/linux.html">Linux</a>,    <a href="http://xnike.me/tag/cascades.html">Cascades</a>,    <a href="http://xnike.me/tag/native.html">Native</a>,    <a href="http://xnike.me/tag/java.html">java</a>,    <a href="http://xnike.me/tag/fedora.html">FEDORA</a>,    <a href="http://xnike.me/tag/poco.html">POCO</a>,    <a href="http://xnike.me/tag/theme.html">Theme</a>,    <a href="http://xnike.me/tag/qunit.html">QUnit</a>,    <a href="http://xnike.me/tag/qnx.html">QNX</a>,    <a href="http://xnike.me/tag/js.html">JS</a>,    <a href="http://xnike.me/tag/windows-8.html">Windows 8</a>,    <a href="http://xnike.me/tag/grunt.html">Grunt</a>,    <a href="http://xnike.me/tag/c.html">C++</a>,    <a href="http://xnike.me/tag/qt.html">Qt</a>,    <a href="http://xnike.me/tag/bbndk.html">BBNDK</a>,    <a href="http://xnike.me/tag/blackberry.html">Blackberry</a>,    <a href="http://xnike.me/tag/momentics-ide.html">Momentics IDE</a>,    <a href="http://xnike.me/tag/blackberry-10.html">BlackBerry 10</a>,    <a href="http://xnike.me/tag/playbook.html">PlayBook</a>  </section>
 
 
 
 </aside>    </div>
   </div>
   <footer role="contentinfo"><p>
-    Copyright &copy;  2012&ndash;2014  Nikolay Khramchenkov &mdash;
+    Copyright &copy;  2012&ndash;2015  Nikolay Khramchenkov &mdash;
   <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
 </p></footer>
   <script src="http://xnike.me/theme/js/modernizr-2.0.js"></script>

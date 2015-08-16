@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>xnike's blog</title><link>http://xnike.me/</link><description></description><atom:link href="http://xnike.me/feeds/nikolay-khramchenkov.rss.xml" rel="self"></atom:link><lastBuildDate>Sat, 06 Dec 2014 23:59:00 +0300</lastBuildDate><item><title>Momentics IDE: Installing on a headless Linux system.</title><link>http://xnike.me/blog/2014/12/06/momentics-ide-installing-on-a-headless-linux-system/</link><description>&lt;p&gt;Assume you wish to use &lt;a href="http://jenkins-ci.org/"&gt;Jenkins&lt;/a&gt; to build your BlackBerry 10 applications on a headless Linux system.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>xnike's blog</title><link>http://xnike.me/</link><description></description><atom:link href="http://xnike.me/feeds/nikolay-khramchenkov.rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 16 Aug 2015 11:00:00 +0300</lastBuildDate><item><title>Fixing route for BB10 devices on Linux system.</title><link>http://xnike.me/blog/2015/08/16/fixing-route-for-bb10-devices-on-linux-system/</link><description>&lt;p&gt;After updating my BlackBerry Q10 with name "Q10" to OS 10.3.1 I started expecting connection issue via USB cable:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;[root@localhost ~]# ping Q10.local
+PING Q10.local (169.254.141.173) 56(84) bytes of data.
+^C
+--- Q10.local ping statistics ---
+5 packets transmitted, 0 received, 100% packet loss, time 3999ms
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Output of "route" command shows that device was recognized by system:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;[root@localhost ~]# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         gateway         0.0.0.0         UG    600    0        0 wlp3s0
+Q10.local       linux.local     255.255.255.255 UGH   100    0        0 enp14s0u1
+...
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;As a fix you can repeat  the same command used by system to create item in the kernel ip routing table (you should the same Iface you see in the route output):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;route add -net Q10.local netmask 255.255.255.255 gw linux.local dev enp14s0u1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And now everything is OK:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;[root@localhost ~]# ping Q10.local
+PING Q10.local (169.254.141.173) 56(84) bytes of data.
+64 bytes from Q10.local (169.254.141.173): icmp_seq=1 ttl=255 time=2.16 ms
+64 bytes from Q10.local (169.254.141.173): icmp_seq=2 ttl=255 time=2.51 ms
+64 bytes from Q10.local (169.254.141.173): icmp_seq=3 ttl=255 time=2.29 ms
+^C
+--- Q10.local ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2001ms
+rtt min/avg/max/mdev = 2.164/2.324/2.512/0.153 ms
+&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nikolay Khramchenkov</dc:creator><pubDate>Sun, 16 Aug 2015 11:00:00 +0300</pubDate><guid>tag:xnike.me,2015-08-16:blog/2015/08/16/fixing-route-for-bb10-devices-on-linux-system/</guid><category>BB10</category><category>BlackBerry 10</category><category>Linux</category></item><item><title>Momentics IDE: Installing on a headless Linux system.</title><link>http://xnike.me/blog/2014/12/06/momentics-ide-installing-on-a-headless-linux-system/</link><description>&lt;p&gt;Assume you wish to use &lt;a href="http://jenkins-ci.org/"&gt;Jenkins&lt;/a&gt; to build your BlackBerry 10 applications on a headless Linux system.&lt;/p&gt;
 &lt;p&gt;In this case on attempt to install SDK via ./sdkinstall you could face with the following error:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Qde&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Cannot&lt;/span&gt; &lt;span class="n"&gt;open&lt;/span&gt; &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; 
 &lt;span class="n"&gt;Qde&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Cannot&lt;/span&gt; &lt;span class="n"&gt;open&lt;/span&gt; &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; 
@@ -16,24 +50,24 @@
 It is interesting to know what features and constraints Blackberry's solution will have.&lt;/p&gt;
 &lt;p&gt;Meanwhile, we can easily make unit tests for our JavaScript source codes now by using grunt and qunit. If you are not familiar with grunt, please visit &lt;a href="http://gruntjs.com/getting-started"&gt;Getting started&lt;/a&gt; page on the official site.&lt;/p&gt;
 &lt;p&gt;Assume we've created new Cascades project with the following structure:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;CascadesProject&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
-&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;assets&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
-&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;qml&lt;/span&gt;
-&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;js&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
-&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;Commons&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;
-&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;src&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
-&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;applicationui&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cpp&lt;/span&gt;
-&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;applicationui&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;hpp&lt;/span&gt;
-&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cpp&lt;/span&gt;
-&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;tests&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
-&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;js&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
-&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Common&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;
-&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;about&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt;
-&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Gruntfile&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;
-&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;
-&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;bar&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;descriptor&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xml&lt;/span&gt;
-&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;CascadesProject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pro&lt;/span&gt;
-&lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;icon&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;png&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;CascadesProject/
+├── assets/
+│   ├── main.qml
+│   ├── js/
+│   │   └── Commons.js
+├── src/
+│   ├── applicationui.cpp
+│   ├── applicationui.hpp
+│   └── main.cpp
+├── tests/
+│   ├── js/
+│   │   ├── Common.js
+│   │   └── about.md
+│   ├── Gruntfile.js
+│   └── package.json
+├── bar-descriptor.xml
+├── CascadesProject.pro
+└── icon.png
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -46,13 +80,13 @@ It is interesting to know what features and constraints Blackberry's solution wi
 
 
 &lt;p&gt;function we will use in assets/main.qml&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;import&lt;/span&gt; &lt;span class="n"&gt;bb&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cascades&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;
-&lt;span class="n"&gt;import&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Common&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;js&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;as&lt;/span&gt; &lt;span class="n"&gt;Common&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;bb.cascades&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;js/Common.js&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;Common&lt;/span&gt;
 
 &lt;span class="n"&gt;Page&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="n"&gt;Container&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
         &lt;span class="n"&gt;Label&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-            &lt;span class="nl"&gt;text:&lt;/span&gt; &lt;span class="n"&gt;Common&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Common&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
@@ -80,8 +114,8 @@ npm WARN package.json cascadesproject-js-tests@0.0.1 No README data
 npm http GET https://registry.npmjs.org/grunt
 npm http GET https://registry.npmjs.org/grunt-contrib-qunit
 npm http GET https://registry.npmjs.org/qunitjs
-npm http 304 https://registry.npmjs.org/qunitjs
-npm http 200 https://registry.npmjs.org/grunt
+npm http &lt;span class="m"&gt;304&lt;/span&gt; https://registry.npmjs.org/qunitjs
+npm http &lt;span class="m"&gt;200&lt;/span&gt; https://registry.npmjs.org/grunt
 &lt;span class="o"&gt;&amp;lt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="s"&gt;&amp;lt;&amp;lt; skipped &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;
 &lt;span class="s"&gt;qunitjs&lt;/span&gt;@1.15.0 node_modules/qunitjs
 
@@ -116,7 +150,7 @@ grunt-contrib-qunit@0.5.2 node_modules/grunt-contrib-qunit
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;[&lt;/span&gt;xnike@localhost tests&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;grunt qunit
 Running &lt;span class="s2"&gt;&amp;quot;qunit:all&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;qunit&lt;span class="o"&gt;)&lt;/span&gt; task
 Testing js/Common.html ..OK
-&amp;gt;&amp;gt; 2 assertions passed &lt;span class="o"&gt;(&lt;/span&gt;17ms&lt;span class="o"&gt;)&lt;/span&gt;
+&amp;gt;&amp;gt; &lt;span class="m"&gt;2&lt;/span&gt; assertions passed &lt;span class="o"&gt;(&lt;/span&gt;17ms&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -176,35 +210,35 @@ The application should update the installed application bar-descriptor.xml file 
 
 
 &lt;p&gt;So, if you export application instance as context property in the applicationui.cpp&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;qml&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;setContextProperty&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;App&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;qml-&amp;gt;setContextProperty(&amp;quot;App&amp;quot;, this);
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;you can invoke implemented method from the QML:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;....&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;....
 
-&lt;span class="n"&gt;DropDown&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nl"&gt;id:&lt;/span&gt; &lt;span class="n"&gt;themeDropDown&lt;/span&gt;
-    &lt;span class="nl"&gt;title:&lt;/span&gt; &lt;span class="n"&gt;qsTr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Theme&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Retranslate&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;onLocaleOrLanguageChanged&lt;/span&gt;
+DropDown {
+    id: themeDropDown
+    title: qsTr(&amp;quot;Theme&amp;quot;) + Retranslate.onLocaleOrLanguageChanged
 
-    &lt;span class="n"&gt;Option&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="nl"&gt;text:&lt;/span&gt; &lt;span class="n"&gt;qsTr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Bright&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Retranslate&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;onLocaleOrLanguageChanged&lt;/span&gt;
-        &lt;span class="nl"&gt;value:&lt;/span&gt; &lt;span class="n"&gt;VisualStyle&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Bright&lt;/span&gt;
-        &lt;span class="nl"&gt;selected:&lt;/span&gt; &lt;span class="n"&gt;VisualStyle&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Bright&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;Application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;themeSupport&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;theme&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;colorTheme&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;style&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;
+    Option {
+        text: qsTr(&amp;quot;Bright&amp;quot;) + Retranslate.onLocaleOrLanguageChanged
+        value: VisualStyle.Bright
+        selected: VisualStyle.Bright == Application.themeSupport.theme.colorTheme.style
+    }
 
-    &lt;span class="n"&gt;Option&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="nl"&gt;text:&lt;/span&gt; &lt;span class="n"&gt;qsTr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Dark&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;Retranslate&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;onLocaleOrLanguageChanged&lt;/span&gt;
-        &lt;span class="nl"&gt;value:&lt;/span&gt; &lt;span class="n"&gt;VisualStyle&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Dark&lt;/span&gt;
-        &lt;span class="nl"&gt;selected:&lt;/span&gt; &lt;span class="n"&gt;VisualStyle&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Dark&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;Application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;themeSupport&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;theme&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;colorTheme&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;style&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
+    Option {
+        text: qsTr(&amp;quot;Dark&amp;quot;) + Retranslate.onLocaleOrLanguageChanged
+        value: VisualStyle.Dark
+        selected: VisualStyle.Dark == Application.themeSupport.theme.colorTheme.style
+    }
+}
 
-&lt;span class="p"&gt;....&lt;/span&gt;
+....
 
-&lt;span class="nl"&gt;onSomething:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;App&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;changeTheme&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;themeDropDown&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;selectedValue&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
+onSomething: {
+    App.changeTheme(themeDropDown.selectedValue);
+}
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -250,11 +284,11 @@ You can easily find what are the differencies in the bytecodes of the two versio
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;javap -c A
 Compiled from &lt;span class="s2"&gt;&amp;quot;A.java&amp;quot;&lt;/span&gt;
 public class A &lt;span class="o"&gt;{&lt;/span&gt;
-  public static final java.lang.String s;
+  public static final java.lang.String s&lt;span class="p"&gt;;&lt;/span&gt;
 
-  public static final int i;
+  public static final int i&lt;span class="p"&gt;;&lt;/span&gt;
 
-  public A&lt;span class="o"&gt;()&lt;/span&gt;;
+  public A&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     Code:
        0: aload_0       
        1: invokespecial &lt;span class="c"&gt;#1                  // Method java/lang/Object.&amp;quot;&amp;lt;init&amp;gt;&amp;quot;:()V&lt;/span&gt;
@@ -293,7 +327,7 @@ rvct-version&lt;span class="o"&gt;=&lt;/span&gt;none
 default-buildenv&lt;span class="o"&gt;=&lt;/span&gt;VC&lt;span class="m"&gt;10&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nikolay Khramchenkov</dc:creator><pubDate>Sat, 12 Jan 2013 12:41:00 +0400</pubDate><guid>tag:xnike.me,2013-01-12:blog/2013/01/12/marmalade-sdk-and-a-non-admin-user-in-win8/</guid><category>Blackberry</category><category>BB10</category><category>Marmalade</category><category>PlayBook</category><category>Windows 8</category></item><item><title>Cascades for Blackberry 10. Theme based asset selector</title><link>http://xnike.me/blog/2012/12/19/cascades-for-blackberry-10-theme-based-asset-selector/</link><description>&lt;p _="%" center="center" https:_developer.blackberry.com_cascades_files_reference_images_theme_examples.png="https://developer.blackberry.com/cascades/files/reference/images/theme_examples.png" img="img"&gt;Upcoming Blackberry 10 release will have full theme support. According to the &lt;a href="https://developer.blackberry.com/cascades/reference/bb__cascades__themesupport.html"&gt;API Documentation&lt;/a&gt; there are Brigth and Dark themes:&lt;/p&gt;
 &lt;p&gt;The default theme is Bright. To change the application theme to Dark specify the following configuration value in the application`s bar-descriptor.xml file:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt; &lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;CASCADES_THEME&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;dark&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;lt;env var=&amp;quot;CASCADES_THEME&amp;quot; value=&amp;quot;dark&amp;quot;/&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -355,17 +389,17 @@ default-buildenv&lt;span class="o"&gt;=&lt;/span&gt;VC&lt;span class="m"&gt;10&l
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Load the environment variables for the console session:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;source&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;SDK root&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bbndk&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;source &amp;quot;SDK root&amp;quot;/bbndk-env.sh
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Configuring build:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Unpacked POCO root&amp;quot;&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;configure&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Profile file name&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;omit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;NetSSL_OpenSSL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;Crypto&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;Data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ODBC&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;Data&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;MySQL&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;no&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;tests&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;no&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;samples&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="k"&gt;static&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Profile result directory&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;cd &amp;quot;Unpacked POCO root&amp;quot;
+./configure --config=&amp;quot;Profile file name&amp;quot; --omit=NetSSL_OpenSSL,Crypto,Data/ODBC,Data/MySQL --no-tests --no-samples --static --prefix=&amp;quot;Profile result directory&amp;quot;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Compiling and installing result of the build in the "Profile result directory":&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;make&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;
-&lt;span class="n"&gt;make&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;make -s
+make install
 &lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nikolay Khramchenkov</dc:creator><pubDate>Sun, 11 Nov 2012 19:38:00 +0400</pubDate><guid>tag:xnike.me,2012-11-11:blog/2012/11/11/building-poco-to-use-with-bbndk/</guid><category>BB10</category><category>BBNDK</category><category>BB10</category><category>Blackberry</category><category>Cascades</category><category>C++</category><category>Native</category><category>Playbook</category><category>POCO</category><category>QNX</category></item></channel></rss>
