@@ -404,6 +404,52 @@ Default value: Yes.</li>\
                     url: 'http://appworld.blackberry.com/webstore/content/39880926'
                 });
 
+                slides.push({
+                    image: 'http://appworld.blackberry.com/webstore/servedimages/15438138.png/?t=12',
+                    text: 'VK10',
+                    description: '"VK10" is the vk.com full featured client for BlackBerry10.<br><br>\
+<p>The application is on the early state of the development process. Only donaters of 300+ rubles can influence on the application features implementation sequence and get promocode for BBW.</p>\
+<table border="0" cellpadding="0" cellspacing="0" style="margin-left:auto;margin-right:auto">\
+    <tr>\
+        <td>\
+            <div style="padding: 0.6em; background-color: #DAE6F2; border: 1px solid #B8CFE6; border-radius: 7px; -moz-border-radius: 7px;">\
+                <a href="https://money.yandex.ru/embed/?from=sbal" title="Виджеты Яндекс.Денег" style="width: 200px; height: 100px; display: block; margin-bottom: 0.6em; background: url(\'https://money.yandex.ru/share-balance.xml?id=329636802&key=59B01BAF0D163C74\') 0 0 no-repeat; -background: none; -filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'https://money.yandex.ru/share-balance.xml?id=329636802&key=59B01BAF0D163C74\', sizingMethod = \'crop\');"></a>\
+                <form action="https://money.yandex.ru/direct-payment.xml" method="post">\
+                    <input type="hidden" name="receiver" value="410013433206577"/>\
+                    <input type="hidden" name="sum" value="300"/>\
+                    <input type="hidden" name="destination" value="Яндекс.Деньги &#8212; на хорошее дело не жалко!"/>\
+                    <input type="hidden" name="FormComment" value="Пожертвование через виджет &#171Мой баланс&#187;"/>\
+                    <input type="submit" value="Поддержать проект" style="margin-top: 0.6em; width: 100%;"/>\
+                </form>\
+            </div>\
+        </td>\
+    </tr>\
+</table>\
+<h3><strong>Features</strong>:</h3>\
+<ol>\
+<li>Changing message status.</li>\
+<li>Contacts list.</li>\
+<li>Private chats.</li>\
+</ol>\
+<h3><strong>In Progress</strong>:</h3>\
+<ol>\
+<li><a href="https://appworld.blackberry.com/webstore/vendor/45561/">Pumano</a>: Audio Player.</li>\
+<li><a href="https://appworld.blackberry.com/webstore/vendor/76432/">Troll Sid</a>: Upload in chats and changing user avatar.</li>\
+<li><a href="https://appworld.blackberry.com/webstore/vendor/39984/">xnike</a>: Private chats UI performance.</li>\
+</ol>\
+<h3><strong>Backlog</strong>:</h3>\
+<ol>\
+<li>Contacts integration.</li>\
+<li>Group chats.</li>\
+<li>Hub integration.</li>\
+<li>Chats managements.</li>\
+</ol>',
+                    releases: [
+                        {version: '1.0.0.1 (2015/08/24, OS 10.3.1+)', description: 'Initial alpha release for public.'}
+                    ],
+                    url: 'http://appworld.blackberry.com/webstore/content/59971153'
+                });
+
                 $scope.$watch('slides[0].active', function() {
                     if (slides[0].active) {
                         $scope.selectedSlide = slides[0];
@@ -432,6 +478,13 @@ Default value: Yes.</li>\
                     }
                 });
 
+                $scope.$watch('slides[4].active', function() {
+                    if (slides[4].active) {
+                        $scope.selectedSlide = slides[4];
+                        location.hash = '#4';
+                    }
+                });
+
                 if (undefined != location.hash && '' != location.hash) {
                     var index = parseInt(location.hash.substring(1), 10);
 
@@ -440,7 +493,11 @@ Default value: Yes.</li>\
                         $scope.selectedSlide = slides[index];
                     }
                 }
-            });
+            }).filter('to_trusted', ['$sce', function($sce){
+                return function(text) {
+                    return $sce.trustAsHtml(text);
+                };
+            }]);
         </script>
 
         <div style="text-align: center;">All applications are developed according to <a href="privacy-policy.html">Privacy Policy</a></div><br>
@@ -455,7 +512,7 @@ Default value: Yes.</li>\
                 </div>
 
                 <tabset justified="true">
-                    <tab heading="Description"><p ng-bind-html="selectedSlide.description"></p></tab>
+                    <tab heading="Description"><p ng-bind-html="selectedSlide.description | to_trusted"></p></tab>
                     <tab heading="Releases">
                         <accordion close-others="oneAtATime">
                             <accordion-group heading="{{release.version}}" ng-repeat="release in selectedSlide.releases"><p ng-bind-html="release.description"></p></accordion-group>
